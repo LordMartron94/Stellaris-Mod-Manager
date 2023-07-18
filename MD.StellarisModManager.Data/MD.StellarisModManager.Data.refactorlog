@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="27e70f3c-23d6-4c31-badf-29e099f0369b" ChangeDateTime="07/18/2023 20:50:08">
+    <Property Name="ElementName" Value="[dbo].[Rule].[AssociatedModID]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Rule]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="AssociatedModId" />
+  </Operation>
+</Operations>

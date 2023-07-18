@@ -7,4 +7,5 @@ public class RuleModel
     public List<ModDataModel> LoadBefore { get; set; }
     public List<IncompatibilityModel> Incompatibilities { get; set; }
     public ModDataModel AssociatedMod { get; set; }
+    public ImposedBy ImposedBy { get; set; }
 }
