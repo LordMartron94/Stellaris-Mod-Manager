@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MD.StellarisModManager.Core", "MD.StellarisModManager.Core\MD.StellarisModManager.Core.csproj", "{16E89E86-B9CC-4238-8B77-014C38EC0BB2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MD.StellarisModManager.UI", "MD.StellarisModManager.UI\MD.StellarisModManager.UI.csproj", "{6E2DA57A-5566-4804-B89A-A85496366181}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{16E89E86-B9CC-4238-8B77-014C38EC0BB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16E89E86-B9CC-4238-8B77-014C38EC0BB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16E89E86-B9CC-4238-8B77-014C38EC0BB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16E89E86-B9CC-4238-8B77-014C38EC0BB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E2DA57A-5566-4804-B89A-A85496366181}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E2DA57A-5566-4804-B89A-A85496366181}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E2DA57A-5566-4804-B89A-A85496366181}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E2DA57A-5566-4804-B89A-A85496366181}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
