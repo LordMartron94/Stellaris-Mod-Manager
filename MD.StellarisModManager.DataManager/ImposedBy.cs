@@ -1,4 +1,4 @@
-﻿namespace MD.StellarisModManager.Core;
+﻿namespace MD.StellarisModManager.DataManager;
 
 public enum ImposedBy
 {

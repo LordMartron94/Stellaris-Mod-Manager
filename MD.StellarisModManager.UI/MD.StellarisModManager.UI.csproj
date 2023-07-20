@@ -1,10 +1,23 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <OutputType>WinExe</OutputType>
+        <OutputType>Exe</OutputType>
         <TargetFramework>net7.0-windows</TargetFramework>
         <Nullable>enable</Nullable>
         <UseWPF>true</UseWPF>
+        <IsPackable>false</IsPackable>
+        <Company>Mr. Hoorn Solutions</Company>
+        <AssemblyName>StellarisModManager</AssemblyName>
+        <ApplicationIcon>Resources\logo.ico</ApplicationIcon>
     </PropertyGroup>
+
+    <ItemGroup>
+      <Folder Include="Models" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Caliburn.Micro" Version="4.0.212" />
+      <PackageReference Include="System.Linq" Version="4.3.0" />
+    </ItemGroup>
 
 </Project>

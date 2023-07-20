@@ -1,4 +1,4 @@
-﻿namespace MD.StellarisModManager.Core;
+﻿namespace MD.StellarisModManager.DataManager;
 
 /// <summary>
 /// Provides a list of categories to which a mod can belong to.

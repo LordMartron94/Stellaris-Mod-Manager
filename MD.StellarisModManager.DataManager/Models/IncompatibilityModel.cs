@@ -1,4 +1,6 @@
-﻿namespace MD.StellarisModManager.Core.Model;
+﻿using MD.StellarisModManager.DataManager.Library;
+
+namespace MD.StellarisModManager.DataManager.Models;
 
 public class IncompatibilityModel
 {

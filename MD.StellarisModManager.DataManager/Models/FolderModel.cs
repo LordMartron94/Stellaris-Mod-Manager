@@ -1,4 +1,4 @@
-﻿namespace MD.StellarisModManager.Core.Model;
+﻿namespace MD.StellarisModManager.DataManager.Models;
 
 public class FolderModel
 {

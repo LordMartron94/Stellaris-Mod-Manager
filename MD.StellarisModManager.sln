@@ -1,8 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MD.StellarisModManager.Core", "MD.StellarisModManager.Core\MD.StellarisModManager.Core.csproj", "{16E89E86-B9CC-4238-8B77-014C38EC0BB2}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MD.StellarisModManager.UI", "MD.StellarisModManager.UI\MD.StellarisModManager.UI.csproj", "{6E2DA57A-5566-4804-B89A-A85496366181}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MD.Common", "MD.Common\MD.Common.csproj", "{CDAA46D8-5584-4461-A45F-70E89B49548B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MD.StellarisModManager.DataManager", "MD.StellarisModManager.DataManager\MD.StellarisModManager.DataManager.csproj", "{07A0084A-13E7-4761-8CB7-BE8F884DBA4D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MD.StellarisModManager.DataManager.Library", "MD.StellarisModManager.DataManager.Library\MD.StellarisModManager.DataManager.Library.csproj", "{9026A511-8D1C-42A8-9FCB-CC5EEDA5E2AD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{C7579560-011A-4FE8-A50F-C122C7986AF0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MD.StellarisModManager.UI.Library", "MD.StellarisModManager.UI.Library\MD.StellarisModManager.UI.Library.csproj", "{CE48B294-733B-4A76-8600-A7B925CA3B72}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -10,13 +18,29 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{16E89E86-B9CC-4238-8B77-014C38EC0BB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{16E89E86-B9CC-4238-8B77-014C38EC0BB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{16E89E86-B9CC-4238-8B77-014C38EC0BB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{16E89E86-B9CC-4238-8B77-014C38EC0BB2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6E2DA57A-5566-4804-B89A-A85496366181}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6E2DA57A-5566-4804-B89A-A85496366181}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6E2DA57A-5566-4804-B89A-A85496366181}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6E2DA57A-5566-4804-B89A-A85496366181}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDAA46D8-5584-4461-A45F-70E89B49548B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDAA46D8-5584-4461-A45F-70E89B49548B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDAA46D8-5584-4461-A45F-70E89B49548B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDAA46D8-5584-4461-A45F-70E89B49548B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07A0084A-13E7-4761-8CB7-BE8F884DBA4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07A0084A-13E7-4761-8CB7-BE8F884DBA4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07A0084A-13E7-4761-8CB7-BE8F884DBA4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07A0084A-13E7-4761-8CB7-BE8F884DBA4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9026A511-8D1C-42A8-9FCB-CC5EEDA5E2AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9026A511-8D1C-42A8-9FCB-CC5EEDA5E2AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9026A511-8D1C-42A8-9FCB-CC5EEDA5E2AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9026A511-8D1C-42A8-9FCB-CC5EEDA5E2AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7579560-011A-4FE8-A50F-C122C7986AF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7579560-011A-4FE8-A50F-C122C7986AF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7579560-011A-4FE8-A50F-C122C7986AF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7579560-011A-4FE8-A50F-C122C7986AF0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE48B294-733B-4A76-8600-A7B925CA3B72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE48B294-733B-4A76-8600-A7B925CA3B72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE48B294-733B-4A76-8600-A7B925CA3B72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE48B294-733B-4A76-8600-A7B925CA3B72}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
