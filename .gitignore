@@ -7,7 +7,7 @@
 *.sln.docstates
 /.idea
 /.vs
-/[Tt]est/
+/[Tt]est
 
 # Build results
 [Dd]ebug/
@@ -193,4 +193,3 @@ git_stats/*
 StyleCop.Cache
 bin
 obj
-Test/
