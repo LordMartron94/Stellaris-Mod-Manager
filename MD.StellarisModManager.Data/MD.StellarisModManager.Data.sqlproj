@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="PublishLocations\MD.StellarisModManager.Data.publish.xml" />
+    <None Include="dbo\Stored Procedures\Test.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Mod.sql" />
@@ -74,6 +75,8 @@
     <Build Include="dbo\Tables\LoadAfter.sql" />
     <Build Include="dbo\Tables\LoadBefore.sql" />
     <Build Include="dbo\Stored Procedures\spModLookup.sql" />
+    <Build Include="dbo\Stored Procedures\spModGetAll.sql" />
+    <Build Include="dbo\Stored Procedures\spAddMod.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="MD.StellarisModManager.Data.refactorlog" />
