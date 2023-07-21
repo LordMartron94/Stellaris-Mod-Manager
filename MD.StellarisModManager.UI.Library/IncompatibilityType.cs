@@ -1,4 +1,4 @@
-﻿namespace MD.StellarisModManager.DataManager;
+﻿namespace MD.StellarisModManager.UI.Library;
 
 public enum IncompatibilityType
 {

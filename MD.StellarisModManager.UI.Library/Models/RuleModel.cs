@@ -1,6 +1,4 @@
-﻿using MD.StellarisModManager.DataManager.Library;
-
-namespace MD.StellarisModManager.DataManager.Models;
+﻿namespace MD.StellarisModManager.UI.Library.Models;
 
 public class RuleModel
 {
