@@ -1,0 +1,360 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=2CAB0A567F30704CA99AA3EC249E3153/Text/@EntryValue">#region Copyright
+
+//  Stellaris Mod Manager used to manage a library of installed mods for the game of Stellaris
+// Copyright (C) 2023  Matthew David van der Hoorn
+//
+//     This program is free software: you can redistribute it and/or modify
+//     it under the terms of the GNU General Public License as published by
+//     the Free Software Foundation, at version 3 of the license.
+//
+//     This program is distributed in the hope that it will be useful,
+//     but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+//     You should have received a copy of the GNU General Public License
+// along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.
+//
+// CONTACT:
+// Email: md.vanderhoorn@gmail.com
+//     Business Email: admin@studyinstitute.net
+// Discord: mr.hoornasp.learningexpert
+// Phone: +31 6 18206979
+
+#endregion
+
+$HEADER$namespace $NAMESPACE$
+{
+  public class $CLASS$ {$END$}
+}</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=2CBD6971A7955044AD2624B84FB49E38/Text/@EntryValue">#region Copyright
+
+//  Stellaris Mod Manager used to manage a library of installed mods for the game of Stellaris
+// Copyright (C) 2023  Matthew David van der Hoorn
+//
+//     This program is free software: you can redistribute it and/or modify
+//     it under the terms of the GNU General Public License as published by
+//     the Free Software Foundation, at version 3 of the license.
+//
+//     This program is distributed in the hope that it will be useful,
+//     but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+//     You should have received a copy of the GNU General Public License
+// along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.
+//
+// CONTACT:
+// Email: md.vanderhoorn@gmail.com
+//     Business Email: admin@studyinstitute.net
+// Discord: mr.hoornasp.learningexpert
+// Phone: +31 6 18206979
+
+#endregion
+
+$HEADER$using System.ComponentModel;
+namespace $NAMESPACE$
+{
+    public partial class $CLASS$ : Component
+    {
+        public $CLASS$()
+        {
+            InitializeComponent();
+        }
+
+        public $CLASS$(IContainer container)
+        {
+            container.Add(this);
+
+            InitializeComponent();
+        }
+    }
+}</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=37AB964D6E4D424BBE2530F92DA37EEB/Text/@EntryValue">#region Copyright
+
+//  Stellaris Mod Manager used to manage a library of installed mods for the game of Stellaris
+// Copyright (C) 2023  Matthew David van der Hoorn
+//
+//     This program is free software: you can redistribute it and/or modify
+//     it under the terms of the GNU General Public License as published by
+//     the Free Software Foundation, at version 3 of the license.
+//
+//     This program is distributed in the hope that it will be useful,
+//     but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+//     You should have received a copy of the GNU General Public License
+// along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.
+//
+// CONTACT:
+// Email: md.vanderhoorn@gmail.com
+//     Business Email: admin@studyinstitute.net
+// Discord: mr.hoornasp.learningexpert
+// Phone: +31 6 18206979
+
+#endregion
+
+$HEADER$namespace $NAMESPACE$
+{
+  public record $RECORD$($END$);
+}</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=40C163D436D8ED48A6D01A0AFEFC5556/Text/@EntryValue">#region Copyright
+
+//  Stellaris Mod Manager used to manage a library of installed mods for the game of Stellaris
+// Copyright (C) 2023  Matthew David van der Hoorn
+//
+//     This program is free software: you can redistribute it and/or modify
+//     it under the terms of the GNU General Public License as published by
+//     the Free Software Foundation, at version 3 of the license.
+//
+//     This program is distributed in the hope that it will be useful,
+//     but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+//     You should have received a copy of the GNU General Public License
+// along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.
+//
+// CONTACT:
+// Email: md.vanderhoorn@gmail.com
+//     Business Email: admin@studyinstitute.net
+// Discord: mr.hoornasp.learningexpert
+// Phone: +31 6 18206979
+
+#endregion
+
+$HEADER$using NUnit.Framework;
+namespace $NAMESPACE$
+{
+  [TestFixture]
+  public class $CLASS$ {$END$}
+}</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=6FAA6736247D464489DF536819A6D103/Text/@EntryValue">#region Copyright
+
+//  Stellaris Mod Manager used to manage a library of installed mods for the game of Stellaris
+// Copyright (C) 2023  Matthew David van der Hoorn
+//
+//     This program is free software: you can redistribute it and/or modify
+//     it under the terms of the GNU General Public License as published by
+//     the Free Software Foundation, at version 3 of the license.
+//
+//     This program is distributed in the hope that it will be useful,
+//     but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+//     You should have received a copy of the GNU General Public License
+// along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.
+//
+// CONTACT:
+// Email: md.vanderhoorn@gmail.com
+//     Business Email: admin@studyinstitute.net
+// Discord: mr.hoornasp.learningexpert
+// Phone: +31 6 18206979
+
+#endregion
+
+$HEADER$namespace $NAMESPACE$
+{
+  public interface $INTERFACE$ {$END$}
+}</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=7B10AC30B0320A4F95A3763001E1DBF6/Text/@EntryValue">#region Copyright
+
+//  Stellaris Mod Manager used to manage a library of installed mods for the game of Stellaris
+// Copyright (C) 2023  Matthew David van der Hoorn
+//
+//     This program is free software: you can redistribute it and/or modify
+//     it under the terms of the GNU General Public License as published by
+//     the Free Software Foundation, at version 3 of the license.
+//
+//     This program is distributed in the hope that it will be useful,
+//     but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+//     You should have received a copy of the GNU General Public License
+// along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.
+//
+// CONTACT:
+// Email: md.vanderhoorn@gmail.com
+//     Business Email: admin@studyinstitute.net
+// Discord: mr.hoornasp.learningexpert
+// Phone: +31 6 18206979
+
+#endregion
+
+$HEADER$namespace $NAMESPACE$
+{
+  public enum $ENUM$ {$END$}
+}</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=7F2A1BE8D0078241A9AE7802038BAD3C/Text/@EntryValue">#region Copyright
+
+//  Stellaris Mod Manager used to manage a library of installed mods for the game of Stellaris
+// Copyright (C) 2023  Matthew David van der Hoorn
+//
+//     This program is free software: you can redistribute it and/or modify
+//     it under the terms of the GNU General Public License as published by
+//     the Free Software Foundation, at version 3 of the license.
+//
+//     This program is distributed in the hope that it will be useful,
+//     but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+//     You should have received a copy of the GNU General Public License
+// along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.
+//
+// CONTACT:
+// Email: md.vanderhoorn@gmail.com
+//     Business Email: admin@studyinstitute.net
+// Discord: mr.hoornasp.learningexpert
+// Phone: +31 6 18206979
+
+#endregion
+
+$HEADER$using System.Windows.Forms;
+namespace $NAMESPACE$
+{
+    public partial class $CLASS$ : Form
+    {
+        public $CLASS$()
+        {
+            InitializeComponent();
+        }
+    }
+}
+</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=9BB83ED0FF792E47BAAB217C25589C77/Text/@EntryValue">#region Copyright
+
+//  Stellaris Mod Manager used to manage a library of installed mods for the game of Stellaris
+// Copyright (C) 2023  Matthew David van der Hoorn
+//
+//     This program is free software: you can redistribute it and/or modify
+//     it under the terms of the GNU General Public License as published by
+//     the Free Software Foundation, at version 3 of the license.
+//
+//     This program is distributed in the hope that it will be useful,
+//     but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+//     You should have received a copy of the GNU General Public License
+// along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.
+//
+// CONTACT:
+// Email: md.vanderhoorn@gmail.com
+//     Business Email: admin@studyinstitute.net
+// Discord: mr.hoornasp.learningexpert
+// Phone: +31 6 18206979
+
+#endregion
+
+$HEADER$namespace $NAMESPACE$
+{
+  public struct $STRUCT$ {$END$}
+}</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BA94A7DAA9995749B160A45083967454/Text/@EntryValue">#region Copyright
+
+//  Stellaris Mod Manager used to manage a library of installed mods for the game of Stellaris
+// Copyright (C) 2023  Matthew David van der Hoorn
+//
+//     This program is free software: you can redistribute it and/or modify
+//     it under the terms of the GNU General Public License as published by
+//     the Free Software Foundation, at version 3 of the license.
+//
+//     This program is distributed in the hope that it will be useful,
+//     but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+//     You should have received a copy of the GNU General Public License
+// along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.
+//
+// CONTACT:
+// Email: md.vanderhoorn@gmail.com
+//     Business Email: admin@studyinstitute.net
+// Discord: mr.hoornasp.learningexpert
+// Phone: +31 6 18206979
+
+#endregion
+
+[Serializable]
+ public class $MySerializedDictionary$ :
+     SerializableDictionary&lt;$MySerializedKeyValuePair$, $MyKey$, $MyValue$&gt;
+ {
+     [SerializeField] private List&lt;$MySerializedKeyValuePair$&gt; keyValuePairs = new List&lt;$MySerializedKeyValuePair$&gt;();
+ 
+     protected override List&lt;$MySerializedKeyValuePair$&gt; KeyValuePairs =&gt; keyValuePairs;
+     
+     public override void Add ($MyKey$ key, $MyValue$ value)
+     {
+         if (ContainsKey(key))
+         {
+             throw new ArgumentException("The dictionary already contains an entry with the specified key");
+         }
+         
+         KeyValuePairs.Add(new $MySerializedKeyValuePair$(key, value));
+     }
+ }
+ 
+ [Serializable]
+ public class $MySerializedKeyValuePair$ : SerializableKeyValuePair&lt;$MyKey$, $MyValue$&gt;
+ {
+     [SerializeField] private $MyKey$ $key$;
+     [SerializeField] private $MyValue$ $value$;
+ 
+     public override $MyKey$ Key
+     {
+         get =&gt; $key$;
+         set =&gt; $key$ = value;
+     }
+ 
+     public override $MyValue$ Value
+     {
+         get =&gt; Value;
+         set =&gt; $value$ = value;
+     }
+ 
+     public $MySerializedKeyValuePair$($MyKey$ key, $MyValue$ value)
+         : base (key, value)
+     {}
+ }</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=C4795E57DDEC1C4F97BBC8C7173EBBCA/Text/@EntryValue">#region Copyright
+
+//  Stellaris Mod Manager used to manage a library of installed mods for the game of Stellaris
+// Copyright (C) 2023  Matthew David van der Hoorn
+//
+//     This program is free software: you can redistribute it and/or modify
+//     it under the terms of the GNU General Public License as published by
+//     the Free Software Foundation, at version 3 of the license.
+//
+//     This program is distributed in the hope that it will be useful,
+//     but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+//     You should have received a copy of the GNU General Public License
+// along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.
+//
+// CONTACT:
+// Email: md.vanderhoorn@gmail.com
+//     Business Email: admin@studyinstitute.net
+// Discord: mr.hoornasp.learningexpert
+// Phone: +31 6 18206979
+
+#endregion
+
+$HEADER$using System.Windows.Forms;
+
+namespace $NAMESPACE$
+{
+    public partial class $CLASS$ : UserControl
+    {
+        public $CLASS$()
+        {
+            InitializeComponent();
+        }
+    }
+}</s:String></wpf:ResourceDictionary>
