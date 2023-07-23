@@ -8,5 +8,6 @@
     [Category] NVARCHAR(50) NULL, 
     [FolderID] INT NULL, 
     [AuthorRuleID] INT NULL, 
-    [ModderRuleID] INT NULL
+    [ModderRuleID] INT NULL,
+    [Enabled] INT NOT NULL
 )

@@ -3,7 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dd="clr-namespace:GongSolutions.Wpf.DragDrop;assembly=GongSolutions.WPF.DragDrop"
              xmlns:local="clr-namespace:MD.StellarisModManager.UI.Views"
+             xmlns:cm="http://caliburnmicro.com"
              mc:Ignorable="d" FontFamily="Segoe UI Light"
              d:DesignHeight="1060" d:DesignWidth="1920">
     <Grid ShowGridLines="False">
@@ -26,7 +28,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="20" />
+            <RowDefinition Height="80" />
         </Grid.RowDefinitions>
         
         <!--#region Mod Management Column -->
@@ -88,7 +90,7 @@
             Background="Black" Foreground="White"
             Margin="0 0 0 20"
             TextAlignment="Center"
-            Name="ActiveMods"
+            Name="ActiveMods" 
             Text="{Binding ActiveMods}">
             0
         </TextBlock>
@@ -100,41 +102,59 @@
             Background="#575757"
             CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" 
             CanUserReorderColumns="True" CanUserResizeColumns="True" CanUserSortColumns="True"
+            SelectionMode="Single"
+            dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True" dd:DragDrop.DropHandler="{Binding}"
             Name="InstalledMods">
             <DataGrid.Columns>
-                <DataGridCheckBoxColumn Header="Enabled" >
-
+                <DataGridCheckBoxColumn Header="Enabled" Binding="{Binding Enabled, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False">
+                    
                 </DataGridCheckBoxColumn>
                 
-                <DataGridTextColumn Header="Mod Name" Width="200" >
+                <DataGridTextColumn Header="Mod Name" Width="200" Binding="{Binding Raw.ModName}" IsReadOnly="True">
 
                 </DataGridTextColumn>
                 
-                <DataGridTextColumn Header="Conflicts and Flags" >
+                <DataGridTextColumn Header="Conflicts and Flags" IsReadOnly="True" >
 
                 </DataGridTextColumn>
                 
-                <DataGridTextColumn Header="Mod Version" >
+                <DataGridTextColumn Header="Mod Version" Binding="{Binding Raw.ModVersion}" IsReadOnly="True">
 
                 </DataGridTextColumn>
                 
-                <DataGridTextColumn Header="Stellaris Version" >
+                <DataGridTextColumn Header="Stellaris Version" Binding="{Binding Raw.SupportedStellarisVersion}" IsReadOnly="True">
 
                 </DataGridTextColumn>
                 
-                <DataGridTextColumn Header="Category" >
+                <DataGridTemplateColumn Header="Category">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding ModCategory, UpdateSourceTrigger=PropertyChanged}"/>
+                        </DataTemplate>    
+                    </DataGridTemplateColumn.CellTemplate>
+                    
+                    <DataGridTemplateColumn.CellEditingTemplate>
+                        <DataTemplate>
+                            <ComboBox ItemsSource="{Binding PossibleCategories}" SelectedItem="{Binding ModCategory}">
+                                <!-- <ComboBox.ItemTemplate> -->
+                                <!--     <DataTemplate> -->
+                                <!--         <TextBlock Text="{Binding Value}"></TextBlock> -->
+                                <!--     </DataTemplate> -->
+                                <!-- </ComboBox.ItemTemplate> -->
+                            </ComboBox>
+                        </DataTemplate>    
+                    </DataGridTemplateColumn.CellEditingTemplate>
+                </DataGridTemplateColumn>
+                
+                <DataGridTextColumn Header="Tags" Binding="{Binding Raw.TagDisplayText}" IsReadOnly="True">
 
                 </DataGridTextColumn>
                 
-                <DataGridComboBoxColumn Header="Tags" >
-
-                </DataGridComboBoxColumn>
-                
-                <DataGridTextColumn Header="Display Count" >
+                <DataGridTextColumn Header="Display Count" Binding="{Binding DisplayPriority}" IsReadOnly="False">
 
                 </DataGridTextColumn>
                 
-                <DataGridTextColumn Header="Notes" Width="362" >
+                <DataGridTextColumn Header="Notes" Width="362" IsReadOnly="False">
 
                 </DataGridTextColumn>
             </DataGrid.Columns>
@@ -185,7 +205,7 @@
         
         <Grid 
             Grid.Column="8" Grid.Row="3" Grid.ColumnSpan="3"
-            Width="800" Height="870"
+            Width="800" Height="810"
             Margin="40 0 0 0"
             HorizontalAlignment="Left"
             Background="#575757"

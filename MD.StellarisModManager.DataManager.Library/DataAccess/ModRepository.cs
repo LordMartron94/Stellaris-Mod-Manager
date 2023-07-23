@@ -18,18 +18,18 @@ public class ModRepository
     
     public List<ModDataModel> GetAllMods()
     {
-        dynamic? output = _sql.LoadData<ModDataModel>("spModGetAll", Connection.Default);
+        List<ModDataModel> output = _sql.LoadData<ModDataModel>("spModGetAll", Connection.Default);
 
         return output;
     }
     
-    public List<ModDataModel> GetModById(int id)
+    public ModDataModel GetModById(int id)
     {
         dynamic p = new { Id = id };
 
-        dynamic? output = _sql.LoadData<ModDataModel, dynamic>("spModLookup", p, Connection.Default);
+        List<ModDataModel> output = _sql.LoadData<ModDataModel, dynamic>("spModLookup", p, Connection.Default);
 
-        return output;
+        return output[0];
     }
     
     #endregion
@@ -48,11 +48,12 @@ public class ModRepository
             Category = mod.Category,
             FolderID = mod.FolderID,
             AuthorRuleID = mod.AuthorRuleID,
-            ModderRuleID = mod.ModderRuleID
+            ModderRuleID = mod.ModderRuleID,
+            Enabled = mod.Enabled
         };
         
         dynamic? output = _sql.SaveData<dynamic>("spAddMod", p, Connection.Default);
-
+    
         return output;
     }
     

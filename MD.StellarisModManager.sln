@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MD.StellarisModManager.UI.Library", "MD.StellarisModManager.UI.Library\MD.StellarisModManager.UI.Library.csproj", "{CE48B294-733B-4A76-8600-A7B925CA3B72}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MD.StellarisModManager.Common", "MD.StellarisModManager.Common\MD.StellarisModManager.Common.csproj", "{18D8D937-3D67-47FD-B975-3B0D8B7530C5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,5 +44,9 @@ Global
 		{CE48B294-733B-4A76-8600-A7B925CA3B72}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE48B294-733B-4A76-8600-A7B925CA3B72}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE48B294-733B-4A76-8600-A7B925CA3B72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18D8D937-3D67-47FD-B975-3B0D8B7530C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18D8D937-3D67-47FD-B975-3B0D8B7530C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18D8D937-3D67-47FD-B975-3B0D8B7530C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18D8D937-3D67-47FD-B975-3B0D8B7530C5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using Caliburn.Micro;
+using MD.StellarisModManager.UI.Library.Api;
 using MD.StellarisModManager.UI.ViewModels;
 
 namespace MD.StellarisModManager.UI;
 
 public class Bootstrapper : BootstrapperBase
 {
-    private SimpleContainer _container;
+    private readonly SimpleContainer _container;
     
     public Bootstrapper()
     {
@@ -20,7 +21,8 @@ public class Bootstrapper : BootstrapperBase
 
     protected override void Configure()
     {
-        _container.Instance(_container);
+        _container.Instance(_container)
+            .PerRequest<ModEndpoint>();
 
         _container
             .Singleton<IWindowManager, WindowManager>()

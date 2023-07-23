@@ -1,4 +1,4 @@
-﻿namespace MD.StellarisModManager.UI.Library.Models;
+﻿namespace MD.StellarisModManager.DataManager.Models;
 
 public class ModDataRawModel
 {
@@ -15,6 +15,4 @@ public class ModDataRawModel
 
     public List<string> Tags { get; set; }
     public List<string> Dependencies { get; set; }
-    
-    public string TagDisplayText => string.Join(", ", Tags);
 }

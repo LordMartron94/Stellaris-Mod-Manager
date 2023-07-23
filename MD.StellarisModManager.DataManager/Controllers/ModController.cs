@@ -1,5 +1,6 @@
-﻿using MD.StellarisModManager.DataManager.Library.DataAccess;
-using MD.StellarisModManager.DataManager.Library.Models;
+﻿using MD.StellarisModManager.DataManager.Internal.Helpers;
+using MD.StellarisModManager.DataManager.Library.DataAccess;
+using MD.StellarisModManager.DataManager.Models;
 
 namespace MD.StellarisModManager.DataManager.Controllers;
 
@@ -17,11 +18,11 @@ public class ModController
     /// <summary>
     /// Gets a specific mod's information from the database.
     /// </summary>
-    /// <param name="id">The ID of the mod to search for.</param>
+    /// <param name="id">The Database ID of the mod to search for.</param>
     /// <returns>The found mod.</returns>
     public ModDataModel GetById(int id)
     {
-        return _modRepository.GetModById(id).First();
+        return DataConversion.InternalToPublic(_modRepository.GetModById(id));
     }
 
     /// <summary>
@@ -30,7 +31,11 @@ public class ModController
     /// <returns>A list of mods in the database.</returns>
     public List<ModDataModel> GetAll()
     {
-        return _modRepository.GetAllMods();
+        List<Library.Models.ModDataModel> raw = _modRepository.GetAllMods();
+
+        List<ModDataModel> output = raw.Select(DataConversion.InternalToPublic).ToList();
+        
+        return output;
     }
     
     #endregion
@@ -41,10 +46,10 @@ public class ModController
     /// Adds a mod to the database.
     /// </summary>
     /// <param name="mod">The mod to add.</param>
-    /// <returns>The ID of the mod.</returns>
+    /// <returns>The Database ID of the mod.</returns>
     public int AddMod(ModDataModel mod)
     {
-        return _modRepository.AddMod(mod);
+        return _modRepository.AddMod(DataConversion.PublicToInternal(mod));
     }
     
     #endregion

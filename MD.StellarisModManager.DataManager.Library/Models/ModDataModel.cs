@@ -11,4 +11,5 @@ public class ModDataModel
     public int? FolderID { get; set; }
     public int? AuthorRuleID { get; set; }
     public int? ModderRuleID { get; set; }
+    public int Enabled { get; set; }
 }
