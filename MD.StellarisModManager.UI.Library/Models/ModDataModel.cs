@@ -45,13 +45,9 @@ public class ModDataModel : INotifyPropertyChanged
         get => _displayPriority;
         set
         {
-            // ReSharper disable once InvertIf
-            if (CanChangePriority(value))
-            {
-                OriginalDisplayPriority = _displayPriority;
-                _displayPriority = value;
-                OnPropertyChanged();
-            }
+            OriginalDisplayPriority = _displayPriority;
+            _displayPriority = value;
+            OnPropertyChanged();
         }
     }
 
@@ -93,17 +89,6 @@ public class ModDataModel : INotifyPropertyChanged
     protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
-    
-    #endregion
-    
-    #region Checks
-
-    public bool CanChangePriority(int value)
-    {
-        bool output = value >= 0;
-
-        return output;
     }
     
     #endregion

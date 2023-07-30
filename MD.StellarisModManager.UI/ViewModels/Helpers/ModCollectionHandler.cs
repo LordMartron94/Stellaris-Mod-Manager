@@ -30,7 +30,10 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using MD.StellarisModManager.UI.Library.Extensions;
 using MD.StellarisModManager.UI.Library.Models;
-using MD.StellarisModManager.UI.ViewModels.Helpers.Strategies;
+using MD.StellarisModManager.UI.Library.ModSorting;
+using MD.StellarisModManager.UI.Library.PropertyChangeHandling;
+using MD.StellarisModManager.UI.Library.PropertyChangeHandling.DisplayCountHandling;
+using MD.StellarisModManager.UI.Library.PropertyChangeHandling.DisplayCountHandling.Strategies;
 
 namespace MD.StellarisModManager.UI.ViewModels.Helpers;
 

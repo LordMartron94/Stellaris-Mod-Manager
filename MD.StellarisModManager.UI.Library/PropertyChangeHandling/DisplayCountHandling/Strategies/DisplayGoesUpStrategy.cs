@@ -23,9 +23,15 @@
 
 #endregion
 
-namespace MD.StellarisModManager.UI.ViewModels.Helpers;
+using System.ComponentModel;
+using MD.StellarisModManager.UI.Library.Models;
 
-public interface IPropertyChangeStrategy
+namespace MD.StellarisModManager.UI.Library.PropertyChangeHandling.DisplayCountHandling.Strategies;
+
+public class DisplayGoesUpStrategy : IDisplayChangedStrategy
 {
-    void HandlePropertyChange(object? sender);
+    public void Handle(ref BindingList<ModDataModel> installedMods, ModDataModel modChanged, int oldDisplay, int newDisplay)
+    {
+        ModDisplayChangeHelper.DecreasePrioritiesInBetween(ref installedMods, modChanged, oldDisplay, newDisplay);
+    }
 }

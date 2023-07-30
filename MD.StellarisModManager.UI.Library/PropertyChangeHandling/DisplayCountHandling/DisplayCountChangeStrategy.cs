@@ -23,12 +23,12 @@
 
 #endregion
 
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using MD.StellarisModManager.UI.Library.Models;
+using MD.StellarisModManager.UI.Library.ModSorting;
+using MD.StellarisModManager.UI.Library.PropertyChangeHandling.DisplayCountHandling.Strategies;
 
-namespace MD.StellarisModManager.UI.ViewModels.Helpers.Strategies;
+namespace MD.StellarisModManager.UI.Library.PropertyChangeHandling.DisplayCountHandling;
 
 public class DisplayCountChangeStrategy : IPropertyChangeStrategy
 {

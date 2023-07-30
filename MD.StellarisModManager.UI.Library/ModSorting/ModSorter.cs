@@ -23,15 +23,16 @@
 
 #endregion
 
-using System;
+using System.ComponentModel;
+using MD.StellarisModManager.UI.Library.Extensions;
+using MD.StellarisModManager.UI.Library.Models;
 
-namespace MD.StellarisModManager.UI.ViewModels.Helpers.Strategies;
+namespace MD.StellarisModManager.UI.Library.ModSorting;
 
-public class EnabledChangeStrategy : IPropertyChangeStrategy
+public class ModSorter : IModSorter
 {
-    public void HandlePropertyChange(object? sender)
+    public void SortByDisplayCount(BindingList<ModDataModel> mods)
     {
-        // TODO - Add mod to the load order list
-        Console.WriteLine("Mod toggled");
+        mods.OrderBy(mod => mod.DisplayPriority);
     }
 }

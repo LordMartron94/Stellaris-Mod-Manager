@@ -26,7 +26,7 @@
 using System.ComponentModel;
 using MD.StellarisModManager.UI.Library.Models;
 
-namespace MD.StellarisModManager.UI.ViewModels.Helpers;
+namespace MD.StellarisModManager.UI.Library.PropertyChangeHandling.DisplayCountHandling;
 
 public static class ModDisplayChangeHelper
 {

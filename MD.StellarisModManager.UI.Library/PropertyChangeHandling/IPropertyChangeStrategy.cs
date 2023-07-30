@@ -23,12 +23,9 @@
 
 #endregion
 
-using System.ComponentModel;
-using MD.StellarisModManager.UI.Library.Models;
+namespace MD.StellarisModManager.UI.Library.PropertyChangeHandling;
 
-namespace MD.StellarisModManager.UI.ViewModels.Helpers;
-
-public interface IDisplayChangedStrategy
+public interface IPropertyChangeStrategy
 {
-    void Handle(ref BindingList<ModDataModel> installedMods, ModDataModel modChanged, int oldDisplay, int newDisplay);
+    void HandlePropertyChange(object? sender);
 }

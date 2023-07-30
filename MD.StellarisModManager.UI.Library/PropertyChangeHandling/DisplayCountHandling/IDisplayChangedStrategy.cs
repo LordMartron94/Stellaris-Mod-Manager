@@ -24,15 +24,11 @@
 #endregion
 
 using System.ComponentModel;
-using MD.StellarisModManager.UI.Library.Extensions;
 using MD.StellarisModManager.UI.Library.Models;
 
-namespace MD.StellarisModManager.UI.ViewModels.Helpers;
+namespace MD.StellarisModManager.UI.Library.PropertyChangeHandling.DisplayCountHandling;
 
-public class ModSorter : IModSorter
+public interface IDisplayChangedStrategy
 {
-    public void SortByDisplayCount(BindingList<ModDataModel> mods)
-    {
-        mods.OrderBy(mod => mod.DisplayPriority);
-    }
+    void Handle(ref BindingList<ModDataModel> installedMods, ModDataModel modChanged, int oldDisplay, int newDisplay);
 }

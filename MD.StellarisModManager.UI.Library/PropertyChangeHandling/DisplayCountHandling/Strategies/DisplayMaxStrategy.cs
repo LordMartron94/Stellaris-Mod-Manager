@@ -26,7 +26,7 @@
 using System.ComponentModel;
 using MD.StellarisModManager.UI.Library.Models;
 
-namespace MD.StellarisModManager.UI.ViewModels.Helpers.Strategies;
+namespace MD.StellarisModManager.UI.Library.PropertyChangeHandling.DisplayCountHandling.Strategies;
 
 public class DisplayMaxStrategy : IDisplayChangedStrategy
 {

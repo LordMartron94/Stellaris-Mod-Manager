@@ -26,12 +26,9 @@
 using System.ComponentModel;
 using MD.StellarisModManager.UI.Library.Models;
 
-namespace MD.StellarisModManager.UI.ViewModels.Helpers.Strategies;
+namespace MD.StellarisModManager.UI.Library.ModSorting;
 
-public class DisplayGoesUpStrategy : IDisplayChangedStrategy
+public interface IModSorter
 {
-    public void Handle(ref BindingList<ModDataModel> installedMods, ModDataModel modChanged, int oldDisplay, int newDisplay)
-    {
-        ModDisplayChangeHelper.DecreasePrioritiesInBetween(ref installedMods, modChanged, oldDisplay, newDisplay);
-    }
+    void SortByDisplayCount(BindingList<ModDataModel> mods);
 }
