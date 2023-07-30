@@ -23,23 +23,22 @@
 
 #endregion
 
-namespace MD.StellarisModManager.UI.Library.Models;
+using MD.Common;
+using MD.StellarisModManager.DataManager.Models;
 
-public class ModDataRawModel
+namespace MD.StellarisModManager.UI.Library.Api.Converters;
+
+internal class IncompatibilityConverter : IConverter<IncompatibilityModel, Models.IncompatibilityModel> 
 {
-    public string ModName { get; set; }
-    public string SupportedStellarisVersion { get; set; }
-    public string ModVersion { get; set; }
-
-    public string ModPath { get; set; }
-    // ReSharper disable once InconsistentNaming
-    public string RemoteFileID { get; set; }
-    public string Picture { get; set; }
-    
-    public string ModID => RemoteFileID;
-
-    public List<string> Tags { get; set; }
-    public List<string> Dependencies { get; set; }
-    
-    public string TagDisplayText => string.Join(", ", Tags);
+    public Models.IncompatibilityModel Convert(IncompatibilityModel toConvert)
+    {
+        return new Models.IncompatibilityModel
+        {
+            AssociatedMod = toConvert.AssociatedMod,
+            IncompatibleMod = toConvert.IncompatibleMod,
+            IncompatibilityType = toConvert.IncompatibilityType,
+            Description = toConvert.Description,
+            PossiblePatches = toConvert.PossiblePatches
+        };
+    }
 }

@@ -23,19 +23,15 @@
 
 #endregion
 
+using System.ComponentModel;
 using MD.StellarisModManager.UI.Library.Models;
 
-namespace MD.StellarisModManager.UI.Library.Api.Helpers;
+namespace MD.StellarisModManager.UI.ViewModels.Helpers.Strategies;
 
-internal static class FolderDataConversion
+public class DisplayGoesUpStrategy : IDisplayChangedStrategy
 {
-    internal static FolderModel PublicToInternal(DataManager.Models.FolderModel toConvert)
+    public void Handle(ref BindingList<ModDataModel> installedMods, ModDataModel modChanged, int oldDisplay, int newDisplay)
     {
-        return new FolderModel
-        {
-            FolderName = toConvert.FolderName,
-            FolderID = toConvert.FolderID,
-            DisplayPriority = toConvert.DisplayPriority
-        };
+        ModDisplayChangeHelper.DecreasePrioritiesInBetween(ref installedMods, modChanged, oldDisplay, newDisplay);
     }
 }

@@ -8,6 +8,9 @@
 /.idea
 /.vs
 /[Tt]est
+/.vale-styles
+.vale.ini
+vale.exe
 
 # Build results
 [Dd]ebug/

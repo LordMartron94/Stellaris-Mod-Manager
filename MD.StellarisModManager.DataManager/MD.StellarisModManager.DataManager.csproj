@@ -12,6 +12,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\MD.Common\MD.Common.csproj" />
       <ProjectReference Include="..\MD.StellarisModManager.DataManager.Library\MD.StellarisModManager.DataManager.Library.csproj" />
     </ItemGroup>
 

@@ -23,15 +23,16 @@
 
 #endregion
 
+using MD.Common;
 using MD.StellarisModManager.Common;
 using MD.StellarisModManager.DataManager.Models;
 using Newtonsoft.Json;
 
 namespace MD.StellarisModManager.DataManager.Internal.Helpers;
 
-internal static class DataConversion
+internal class ModDataConverter : IConverterBi<Library.Models.ModDataModel, ModDataModel>
 {
-    internal static ModDataModel InternalToPublic(Library.Models.ModDataModel toConvert)
+    public ModDataModel Convert(Library.Models.ModDataModel toConvert)
     {
         // TODO - add conversion of Folders and Rules
         ModDataRawModel? deserializedRaw = JsonConvert.DeserializeObject<ModDataRawModel>(toConvert.RawData);
@@ -41,44 +42,31 @@ internal static class DataConversion
 
         Enum.TryParse(toConvert.Category, out ModCategory categoryEnumValue);
 
-        ModDataModel convertedModel = new ModDataModel
+        bool enabled = toConvert.Enabled switch
         {
-            DatabaseId = toConvert.Id,
-            Raw = deserializedRaw,
-            DisplayPriority = toConvert.DisplayPriority,
-            DisplayFolder = null,
-            ModCategory = categoryEnumValue,
-            AuthorRule = null,
-            ModderRule = null,
-            SmallDescription = toConvert.DescriptionSmall,
-            ExtendedDescription = toConvert.DescriptionExtended
+            0 => false,
+            1 => true,
+            _ => false
         };
+
+        ModDataModel convertedModel = ModDataFactory.Create(toConvert.Id, deserializedRaw, toConvert.DisplayPriority, enabled, categoryEnumValue,
+            toConvert.DescriptionSmall, toConvert.DescriptionExtended);
         
         return convertedModel;
     }
 
-    internal static Library.Models.ModDataModel PublicToInternal(ModDataModel toConvert)
+    public Library.Models.ModDataModel ConvertBack(ModDataModel toConvertBack)
     {
         // TODO - add conversion of Folders and Rules
-        string serializedRaw = JsonConvert.SerializeObject(toConvert.Raw);
+        string serializedRaw = JsonConvert.SerializeObject(toConvertBack.Raw);
         
-        string? modCategory = toConvert.ModCategory.ToString();
+        string? modCategory = toConvertBack.ModCategory.ToString();
 
-        int enabled = toConvert.Enabled? 1 : 0;
-        
-        Library.Models.ModDataModel convertedModel = new Library.Models.ModDataModel
-        {
-            Id = toConvert.DatabaseId,
-            DisplayPriority = toConvert.DisplayPriority,
-            DescriptionSmall = toConvert.SmallDescription,
-            DescriptionExtended = toConvert.ExtendedDescription,
-            RawData = serializedRaw,
-            Category = modCategory,
-            FolderID = toConvert.DisplayFolder?.FolderID,
-            AuthorRuleID = toConvert.AuthorRule?.RuleID,
-            ModderRuleID = toConvert.ModderRule?.RuleID,
-            Enabled = enabled
-        };
+        int enabled = toConvertBack.Enabled? 1 : 0;
+
+        Library.Models.ModDataModel convertedModel = Library.Models.Helpers.ModDataFactory.Create(toConvertBack.DatabaseId, serializedRaw,
+            toConvertBack.DisplayPriority, enabled, modCategory, toConvertBack.SmallDescription, toConvertBack.ExtendedDescription,
+            toConvertBack.DisplayFolder?.FolderID, toConvertBack.AuthorRule?.RuleID, toConvertBack.ModderRule?.RuleID);
         
         return convertedModel;
     }

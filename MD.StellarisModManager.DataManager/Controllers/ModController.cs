@@ -33,9 +33,12 @@ public class ModController
 {
     private ModRepository _modRepository;
 
+    private ModDataConverter _converter;
+
     public ModController()
     {
         _modRepository = new ModRepository();
+        _converter = new ModDataConverter();
     }
     
     #region Getters
@@ -47,7 +50,7 @@ public class ModController
     /// <returns>The found mod.</returns>
     public ModDataModel GetById(int id)
     {
-        return DataConversion.InternalToPublic(_modRepository.GetModById(id));
+        return _converter.Convert(_modRepository.GetModById(id));
     }
 
     /// <summary>
@@ -58,7 +61,7 @@ public class ModController
     {
         List<Library.Models.ModDataModel> raw = _modRepository.GetAllMods();
 
-        List<ModDataModel> output = raw.Select(DataConversion.InternalToPublic).ToList();
+        List<ModDataModel> output = raw.Select(_converter.Convert).ToList();
         
         return output;
     }
@@ -74,7 +77,7 @@ public class ModController
     /// <returns>The Database ID of the mod.</returns>
     public int AddMod(ModDataModel mod)
     {
-        return _modRepository.AddMod(DataConversion.PublicToInternal(mod));
+        return _modRepository.AddMod(_converter.ConvertBack(mod));
     }
     
     #endregion

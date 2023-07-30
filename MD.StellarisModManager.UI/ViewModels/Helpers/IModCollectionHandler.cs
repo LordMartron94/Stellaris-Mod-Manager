@@ -23,23 +23,20 @@
 
 #endregion
 
-namespace MD.StellarisModManager.UI.Library.Models;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using MD.StellarisModManager.UI.Library.Models;
 
-public class ModDataRawModel
+namespace MD.StellarisModManager.UI.ViewModels.Helpers;
+
+public interface IModCollectionHandler
 {
-    public string ModName { get; set; }
-    public string SupportedStellarisVersion { get; set; }
-    public string ModVersion { get; set; }
-
-    public string ModPath { get; set; }
-    // ReSharper disable once InconsistentNaming
-    public string RemoteFileID { get; set; }
-    public string Picture { get; set; }
+    public BindingList<ModDataModel> InstalledMods { get; set; }
     
-    public string ModID => RemoteFileID;
+    public event PropertyChangedEventHandler? PropertyChanged;
 
-    public List<string> Tags { get; set; }
-    public List<string> Dependencies { get; set; }
-    
-    public string TagDisplayText => string.Join(", ", Tags);
+    void AddMods(IEnumerable<ModDataModel> mods, bool autoSort = true);
+
+    void OnPropertyChange(object? sender, PropertyChangedEventArgs e);
 }

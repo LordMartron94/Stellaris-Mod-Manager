@@ -23,32 +23,46 @@
 
 #endregion
 
+using MD.Common;
 using MD.StellarisModManager.UI.Library.Models;
 
-namespace MD.StellarisModManager.UI.Library.Api.Helpers;
+namespace MD.StellarisModManager.UI.Library.Api.Converters;
 
-internal static class ModDataConversion
+internal class ModDataConverter : IConverter<DataManager.Models.ModDataModel, ModDataModel>
 {
-    internal static ModDataModel PublicToInternal(DataManager.Models.ModDataModel toConvert)
+    private IConverter<DataManager.Models.FolderModel, FolderModel> _folderConverter;
+    private IConverter<DataManager.Models.RuleModel, RuleModel> _ruleConverter;
+    private IConverter<DataManager.Models.ModDataRawModel, ModDataRawModel> _rawDataConverter;
+
+    public ModDataConverter(IConverter<DataManager.Models.FolderModel, FolderModel> folderConverter,
+        IConverter<DataManager.Models.RuleModel, RuleModel> ruleConverter,
+        IConverter<DataManager.Models.ModDataRawModel, ModDataRawModel> rawDataConverter)
+    {
+        _folderConverter = folderConverter;
+        _ruleConverter = ruleConverter;
+        _rawDataConverter = rawDataConverter;
+    }
+    
+    public ModDataModel Convert(DataManager.Models.ModDataModel toConvert)
     {
         FolderModel? displayFolder = null;
         RuleModel? authorRule = null;
         RuleModel? modderRule = null;
 
         if (toConvert.DisplayFolder != null)
-            displayFolder = FolderDataConversion.PublicToInternal(toConvert.DisplayFolder);
+            displayFolder = _folderConverter.Convert(toConvert.DisplayFolder);
         
         if (toConvert.AuthorRule != null)
-            authorRule = RuleDataConversion.PublicToInternal(toConvert.AuthorRule);
+            authorRule = _ruleConverter.Convert(toConvert.AuthorRule);
         
         if (toConvert.ModderRule != null)
-            modderRule = RuleDataConversion.PublicToInternal(toConvert.ModderRule);
+            modderRule = _ruleConverter.Convert(toConvert.ModderRule);
         
         ModDataModel mod = new ModDataModel
         {
             DatabaseId = toConvert.DatabaseId,
             
-            Raw = RawDataConversion.PublicToInternal(toConvert.Raw),
+            Raw = _rawDataConverter.Convert(toConvert.Raw),
             DisplayPriority = toConvert.DisplayPriority, 
 
             DisplayFolder = displayFolder,

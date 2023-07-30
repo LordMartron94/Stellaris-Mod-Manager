@@ -23,24 +23,19 @@
 
 #endregion
 
-using MD.StellarisModManager.UI.Library.Models;
+namespace MD.Common;
 
-namespace MD.StellarisModManager.UI.Library.Api.Helpers;
-
-internal static class RawDataConversion
+/// <summary>
+/// Defines a bi-directional converter that converts objects of type T to objects of type T1, and vice versa.
+/// </summary>
+/// <typeparam name="T">The type of objects to convert from, and to convert back to.</typeparam>
+/// <typeparam name="T1">The type of objects to convert to, and to convert back from.</typeparam>
+public interface IConverterBi<T, T1> : IConverter<T, T1>
 {
-    internal static ModDataRawModel PublicToInternal(DataManager.Models.ModDataRawModel toConvert)
-    {
-        return new ModDataRawModel
-        {
-            ModName = toConvert.ModName,
-            SupportedStellarisVersion = toConvert.SupportedStellarisVersion,
-            ModVersion = toConvert.ModVersion,
-            ModPath = toConvert.ModPath,
-            RemoteFileID = toConvert.RemoteFileID,
-            Picture = toConvert.Picture,
-            Tags = toConvert.Tags,
-            Dependencies = toConvert.Dependencies
-        };
-    }
+    /// <summary>
+    /// Converts an object of type T1 back to an object of type T.
+    /// </summary>
+    /// <param name="toConvertBack">The object to convert back.</param>
+    /// <returns>A new object of type T that is the result of the conversion back.</returns>
+    T ConvertBack(T1 toConvertBack);
 }

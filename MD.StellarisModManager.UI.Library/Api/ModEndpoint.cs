@@ -23,8 +23,9 @@
 
 #endregion
 
+using MD.Common;
 using MD.StellarisModManager.DataManager.Controllers;
-using MD.StellarisModManager.UI.Library.Api.Helpers;
+using MD.StellarisModManager.UI.Library.Api.Converters;
 using MD.StellarisModManager.UI.Library.Models;
 
 namespace MD.StellarisModManager.UI.Library.Api;
@@ -32,23 +33,37 @@ namespace MD.StellarisModManager.UI.Library.Api;
 public class ModEndpoint
 {
     private ModController _modController;
+    
+    private IConverter<DataManager.Models.FolderModel, FolderModel> _folderConverter;
+    private IConverter<DataManager.Models.IncompatibilityModel, IncompatibilityModel> _incompatibilityConverter;
+    private IConverter<DataManager.Models.RuleModel, RuleModel> _ruleConverter;
+    private IConverter<DataManager.Models.ModDataRawModel, ModDataRawModel> _rawDataConverter;
+    private IConverter<DataManager.Models.ModDataModel, ModDataModel> _modDataConverter;
 
     public ModEndpoint()
     {
         _modController = new ModController();
+
+        _folderConverter = new FolderDataConverter();
+
+        _incompatibilityConverter = new IncompatibilityConverter();
+        _ruleConverter = new RuleConverter(_incompatibilityConverter);
+
+        _rawDataConverter = new RawDataConverter();
+        _modDataConverter = new ModDataConverter(_folderConverter, _ruleConverter, _rawDataConverter);
     }
     
     public ModDataModel GetModInfo(int modId)
     {
         DataManager.Models.ModDataModel output = _modController.GetById(modId);
 
-        return ModDataConversion.PublicToInternal(output);
+        return _modDataConverter.Convert(output);
     }
     
     public List<ModDataModel> GetModList()
     {
         List<DataManager.Models.ModDataModel> output = _modController.GetAll();
 
-        return output.Select(ModDataConversion.PublicToInternal).ToList();
+        return output.Select(_modDataConverter.Convert).ToList();
     }
 }

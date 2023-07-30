@@ -16,4 +16,5 @@
       <ProjectReference Include="..\MD.StellarisModManager.Common\MD.StellarisModManager.Common.csproj" />
     </ItemGroup>
 
+
 </Project>

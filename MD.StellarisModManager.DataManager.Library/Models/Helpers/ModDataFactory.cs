@@ -23,23 +23,36 @@
 
 #endregion
 
-namespace MD.StellarisModManager.UI.Library.Models;
+namespace MD.StellarisModManager.DataManager.Library.Models.Helpers;
 
-public class ModDataRawModel
+public static class ModDataFactory
 {
-    public string ModName { get; set; }
-    public string SupportedStellarisVersion { get; set; }
-    public string ModVersion { get; set; }
+    public static ModDataModel Create(
+        int dbId,
+        string rawData,
+        int displayPriority,
+        int enabled,
+        string? category = null,
+        string? smallDescription = null,
+        string? extendedDescription = null,
+        int? displayFolderId = null,
+        int? authorRuleId = null,
+        int? modderRuleId = null)
+    {
+        ModDataModel model = new ModDataModel
+        {
+            Id = dbId,
+            RawData = rawData,
+            Enabled = enabled,
+            DisplayPriority = displayPriority,
+            FolderID = displayFolderId,
+            Category = category,
+            AuthorRuleID = authorRuleId,
+            ModderRuleID = modderRuleId,
+            DescriptionSmall = smallDescription,
+            DescriptionExtended = extendedDescription
+        };
 
-    public string ModPath { get; set; }
-    // ReSharper disable once InconsistentNaming
-    public string RemoteFileID { get; set; }
-    public string Picture { get; set; }
-    
-    public string ModID => RemoteFileID;
-
-    public List<string> Tags { get; set; }
-    public List<string> Dependencies { get; set; }
-    
-    public string TagDisplayText => string.Join(", ", Tags);
+        return model;
+    }  
 }

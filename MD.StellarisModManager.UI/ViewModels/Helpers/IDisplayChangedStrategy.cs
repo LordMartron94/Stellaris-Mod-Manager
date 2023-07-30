@@ -23,23 +23,12 @@
 
 #endregion
 
-namespace MD.StellarisModManager.UI.Library.Models;
+using System.ComponentModel;
+using MD.StellarisModManager.UI.Library.Models;
 
-public class ModDataRawModel
+namespace MD.StellarisModManager.UI.ViewModels.Helpers;
+
+public interface IDisplayChangedStrategy
 {
-    public string ModName { get; set; }
-    public string SupportedStellarisVersion { get; set; }
-    public string ModVersion { get; set; }
-
-    public string ModPath { get; set; }
-    // ReSharper disable once InconsistentNaming
-    public string RemoteFileID { get; set; }
-    public string Picture { get; set; }
-    
-    public string ModID => RemoteFileID;
-
-    public List<string> Tags { get; set; }
-    public List<string> Dependencies { get; set; }
-    
-    public string TagDisplayText => string.Join(", ", Tags);
+    void Handle(ref BindingList<ModDataModel> installedMods, ModDataModel modChanged, int oldDisplay, int newDisplay);
 }
