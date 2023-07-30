@@ -23,13 +23,15 @@
 
 #endregion
 
+using System.ComponentModel;
+using MD.StellarisModManager.UI.Library.Models;
+
 namespace MD.StellarisModManager.UI.Library.PropertyChangeHandling.DisplayCountHandling.Strategies;
 
-public class EnabledChangeStrategy : IPropertyChangeStrategy
+public class DisplayMinStrategy : IDisplayChangedStrategy
 {
-    public void HandlePropertyChange(object? sender)
+    public void Handle(ref BindingList<ModDataModel> installedMods, ModDataModel modChanged, int oldDisplay, int newDisplay)
     {
-        // TODO - Add mod to the load order list
-        Console.WriteLine("Mod toggled");
+        ModDisplayChangeHelper.IncreasePrioritiesInBetween(ref installedMods, modChanged, oldDisplay, newDisplay);
     }
 }

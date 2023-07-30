@@ -57,6 +57,8 @@ public class DisplayCountChangeStrategy : IPropertyChangeStrategy
 
         _displayChangedStrategies = new Dictionary<DisplayChangeCase, IDisplayChangedStrategy>()
         {
+            {DisplayChangeCase.BelowMin, new DisplayBelowMinStrategy()},
+            {DisplayChangeCase.IsMin, new DisplayMinStrategy()},
             {DisplayChangeCase.AboveMax, new DisplayAboveMaxStrategy()},
             {DisplayChangeCase.IsMax, new DisplayMaxStrategy()},
             {DisplayChangeCase.GoesUp, new DisplayGoesUpStrategy()},
@@ -83,28 +85,42 @@ public class DisplayCountChangeStrategy : IPropertyChangeStrategy
     private void HandleDisplayPriorityChange(ModDataModel modToChange)
     {
         int highest = GetHighestDisplayPriority(modToChange);
+        int lowest = GetLowestDisplayPriority(modToChange);
+
+        DisplayChangeCase changeCase = GetChangeCase(modToChange, highest, lowest);
+
+        if (changeCase is DisplayChangeCase.AboveMax or DisplayChangeCase.BelowMin)
+            modToChange.DisplayPriority = changeCase == DisplayChangeCase.AboveMax ? highest : lowest;
+
+        _displayChangedStrategies[changeCase].Handle(ref _installedMods, modToChange, modToChange.OriginalDisplayPriority, modToChange.DisplayPriority);
+    }
+
+    private DisplayChangeCase GetChangeCase(ModDataModel modToChange, int highest, int lowest)
+    {
+        int priority = modToChange.DisplayPriority;
         
-        switch (modToChange.DisplayPriority)
+        if (priority > highest) return DisplayChangeCase.AboveMax;
+        if (priority == highest) return DisplayChangeCase.IsMax;
+        if (priority < lowest) return DisplayChangeCase.BelowMin;
+        if (priority == lowest) return DisplayChangeCase.IsMin;
+        
+        return modToChange.OriginalDisplayPriority > priority ? DisplayChangeCase.GoesDown : DisplayChangeCase.GoesUp;
+    }
+
+    private int GetLowestDisplayPriority(ModDataModel modToFilterOut)
+    {
+        int lowest = int.MaxValue;
+        
+        foreach (ModDataModel modToCheck in _installedMods)
         {
-            case var priority when priority > highest:
-                // Even though it seems redundant, we have to store the original display priority before we truncate, otherwise the algorithm will update mods that are between the pre-truncated value and the truncated value.
-                int originalDisplayPriority = modToChange.OriginalDisplayPriority;
-                modToChange.DisplayPriority = highest;
-                _displayChangedStrategies[DisplayChangeCase.AboveMax].Handle(ref _installedMods, modToChange, originalDisplayPriority, modToChange.DisplayPriority);
-                break;
-            case var priority when priority == highest:
-                _displayChangedStrategies[DisplayChangeCase.IsMax].Handle(ref _installedMods, modToChange, modToChange.OriginalDisplayPriority, modToChange.DisplayPriority);
-                break;
-            case var priority when modToChange.OriginalDisplayPriority > priority:
-                _displayChangedStrategies[DisplayChangeCase.GoesDown].Handle(ref _installedMods, modToChange, modToChange.OriginalDisplayPriority, modToChange.DisplayPriority);
-                break;
-            case var priority when modToChange.OriginalDisplayPriority < priority:
-                _displayChangedStrategies[DisplayChangeCase.GoesUp].Handle(ref _installedMods, modToChange, modToChange.OriginalDisplayPriority, modToChange.DisplayPriority);
-                break;
-            default:
-                Console.WriteLine("Unknown variation of display priority change!");
-                break;
+            if (modToCheck == modToFilterOut)
+                continue;
+            
+            if (modToCheck.DisplayPriority < lowest)
+                lowest = modToCheck.DisplayPriority;
         }
+        
+        return lowest;
     }
 
     private int GetHighestDisplayPriority(ModDataModel modToFilterOut)
