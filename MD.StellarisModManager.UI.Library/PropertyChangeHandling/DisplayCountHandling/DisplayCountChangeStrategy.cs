@@ -76,6 +76,9 @@ public class DisplayCountChangeStrategy : IPropertyChangeStrategy
         _currentlyUpdatingDisplayCount = true;
         
         ModDataModel modToChange = (ModDataModel)sender;
+        
+        // Console.WriteLine($"Property Change: {modToChange}");
+        
         HandleDisplayPriorityChange(modToChange);
         _modSorter.SortByDisplayCount(_installedMods);
 
@@ -89,10 +92,18 @@ public class DisplayCountChangeStrategy : IPropertyChangeStrategy
 
         DisplayChangeCase changeCase = GetChangeCase(modToChange, highest, lowest);
 
-        if (changeCase is DisplayChangeCase.AboveMax or DisplayChangeCase.BelowMin)
-            modToChange.DisplayPriority = changeCase == DisplayChangeCase.AboveMax ? highest : lowest;
+        // We must store this now, otherwise if it is below or above min/max then it will cause weird bugs.
+        // Where each mod will change between the after truncated and before truncated value instead of the after truncated and new value.
+        int originalDisplayCount = modToChange.OriginalDisplayPriority;
 
-        _displayChangedStrategies[changeCase].Handle(ref _installedMods, modToChange, modToChange.OriginalDisplayPriority, modToChange.DisplayPriority);
+        modToChange.DisplayPriority = changeCase switch
+        {
+            DisplayChangeCase.AboveMax => highest,
+            DisplayChangeCase.BelowMin => lowest,
+            _ => modToChange.DisplayPriority
+        };
+
+        _displayChangedStrategies[changeCase].Handle(ref _installedMods, modToChange, originalDisplayCount, modToChange.DisplayPriority);
     }
 
     private DisplayChangeCase GetChangeCase(ModDataModel modToChange, int highest, int lowest)
