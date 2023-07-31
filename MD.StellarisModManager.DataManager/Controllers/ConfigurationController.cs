@@ -23,20 +23,32 @@
 
 #endregion
 
-using MD.Common;
-using MD.StellarisModManager.UI.Library.Models;
+using MD.StellarisModManager.DataManager.Internal;
 
-namespace MD.StellarisModManager.UI.Library.Api.Converters;
+namespace MD.StellarisModManager.DataManager.Controllers;
 
-internal class FolderDataConverter : IConverter<DataManager.Models.Mod.FolderModel, FolderModel>
+public class ConfigurationController
 {
-    public FolderModel Convert(DataManager.Models.Mod.FolderModel toConvert)
+    private ConfigurationManager _configurationManager;
+
+    public ConfigurationController()
     {
-        return new FolderModel
-        {
-            FolderName = toConvert.FolderName,
-            FolderID = toConvert.FolderID,
-            DisplayPriority = toConvert.DisplayPriority
-        };
+        _configurationManager = ConfigurationManager.GetInstance();
+    }
+    
+    /// <summary>
+    /// Overrides the current stellaris mod deployment path.
+    /// </summary>
+    public void OverrideStellarisModDeploymentPath(string path)
+    {
+        _configurationManager.SetStellarisModDeploymentPath(path, false);
+    }
+
+    /// <summary>
+    /// Adds an install location to the configuration.
+    /// </summary>
+    public void AddStellarisModInstallLocation(string path)
+    {
+        _configurationManager.AddStellarisInstallLocation(path, false);
     }
 }

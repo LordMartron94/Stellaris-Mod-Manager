@@ -23,17 +23,12 @@
 
 #endregion
 
+namespace MD.StellarisModManager.UI.Library.ButtonHandling;
 
-using MD.StellarisModManager.Common;
-
-namespace MD.StellarisModManager.DataManager.Models;
-
-public class RuleModel
+public class GoToLoadOrderView : IButtonExecutor
 {
-    public int RuleID { get; set; }
-    public List<int> LoadAfter { get; set; }
-    public List<int> LoadBefore { get; set; }
-    public List<IncompatibilityModel> Incompatibilities { get; set; }
-    public int AssociatedMod { get; set; }
-    public ImposedBy ImposedBy { get; set; }
+    public void Execute()
+    {
+        Console.WriteLine("Enabling Load order view...");
+    }
 }

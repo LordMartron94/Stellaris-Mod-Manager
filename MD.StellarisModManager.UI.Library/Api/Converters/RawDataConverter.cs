@@ -28,9 +28,9 @@ using MD.StellarisModManager.UI.Library.Models;
 
 namespace MD.StellarisModManager.UI.Library.Api.Converters;
 
-internal class RawDataConverter : IConverter<DataManager.Models.ModDataRawModel, ModDataRawModel>
+internal class RawDataConverter : IConverter<DataManager.Models.Mod.ModDataRawModel, ModDataRawModel>
 {
-    public ModDataRawModel Convert(DataManager.Models.ModDataRawModel toConvert)
+    public ModDataRawModel Convert(DataManager.Models.Mod.ModDataRawModel toConvert)
     {
         return new ModDataRawModel
         {

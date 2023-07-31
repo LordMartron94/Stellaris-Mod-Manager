@@ -25,6 +25,7 @@
 
 using MD.StellarisModManager.Common;
 using MD.StellarisModManager.DataManager.Models;
+using MD.StellarisModManager.DataManager.Models.Mod;
 
 namespace MD.StellarisModManager.DataManager.Internal.Helpers;
 

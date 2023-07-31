@@ -28,6 +28,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using Caliburn.Micro;
+using MD.Common;
 using MD.StellarisModManager.UI.Library.Api;
 using MD.StellarisModManager.UI.ViewModels;
 
@@ -36,10 +37,22 @@ namespace MD.StellarisModManager.UI;
 public class Bootstrapper : BootstrapperBase
 {
     private readonly SimpleContainer _container;
+
+    private readonly ConfigurationEndpoint _configurationEndpoint;
+    
+    private readonly Dictionary<string, Action<string>> _argumentMethods;
     
     public Bootstrapper()
     {
         _container = new SimpleContainer();
+
+        _configurationEndpoint = new ConfigurationEndpoint();
+
+        _argumentMethods = new Dictionary<string, Action<string>>
+        {
+            {"stellarismoddeploymentpath",  _configurationEndpoint.SendStellarisModDeploymentOverride},
+            {"stellarismodinstalllocation", _configurationEndpoint.AddStellarisModInstallLocation}
+        };
         
         Initialize();   
     }
@@ -63,9 +76,40 @@ public class Bootstrapper : BootstrapperBase
     
     protected override void OnStartup(object sender, StartupEventArgs e)
     {
+        HandleArgs(e.Args);
+        
         DisplayRootViewForAsync<ShellViewModel>();
     }
-    
+
+    private void HandleArgs(IReadOnlyList<string> eArgs)
+    {
+        for (int i = 0; i < eArgs.Count; i++)
+        {
+            string arg = eArgs[i];
+            
+            
+            // Validate argument as colon-separated string
+            if (!arg.Contains(':'))
+                throw new ArgumentException($"Argument at index {i} must be a colon-separated string.");
+
+            KeyValuePair<string, string> keyValue = arg.ExtractKeyValueFromColonSeparatedString();
+            
+            // Basic validation
+            if (string.IsNullOrWhiteSpace(keyValue.Key) || string.IsNullOrWhiteSpace(keyValue.Value))
+                throw new ArgumentException($"Invalid key-value pair at index {i}. Both key and value must not be null or whitespace.");
+            
+            HandleKeyValuePair(keyValue);
+        }
+    }
+
+    private void HandleKeyValuePair(KeyValuePair<string, string> keyValue)
+    {
+        if (!_argumentMethods.ContainsKey(keyValue.Key))
+            return;
+        
+        _argumentMethods[keyValue.Key].Invoke(keyValue.Value);
+    }
+
     protected override object GetInstance(Type service, string key)
     {
         return _container.GetInstance(service, key);

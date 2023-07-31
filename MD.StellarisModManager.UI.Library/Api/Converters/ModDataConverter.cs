@@ -28,22 +28,22 @@ using MD.StellarisModManager.UI.Library.Models;
 
 namespace MD.StellarisModManager.UI.Library.Api.Converters;
 
-internal class ModDataConverter : IConverter<DataManager.Models.ModDataModel, ModDataModel>
+internal class ModDataConverter : IConverter<DataManager.Models.Mod.ModDataModel, ModDataModel>
 {
-    private IConverter<DataManager.Models.FolderModel, FolderModel> _folderConverter;
-    private IConverter<DataManager.Models.RuleModel, RuleModel> _ruleConverter;
-    private IConverter<DataManager.Models.ModDataRawModel, ModDataRawModel> _rawDataConverter;
+    private IConverter<DataManager.Models.Mod.FolderModel, FolderModel> _folderConverter;
+    private IConverter<DataManager.Models.Mod.RuleModel, RuleModel> _ruleConverter;
+    private IConverter<DataManager.Models.Mod.ModDataRawModel, ModDataRawModel> _rawDataConverter;
 
-    public ModDataConverter(IConverter<DataManager.Models.FolderModel, FolderModel> folderConverter,
-        IConverter<DataManager.Models.RuleModel, RuleModel> ruleConverter,
-        IConverter<DataManager.Models.ModDataRawModel, ModDataRawModel> rawDataConverter)
+    public ModDataConverter(IConverter<DataManager.Models.Mod.FolderModel, FolderModel> folderConverter,
+        IConverter<DataManager.Models.Mod.RuleModel, RuleModel> ruleConverter,
+        IConverter<DataManager.Models.Mod.ModDataRawModel, ModDataRawModel> rawDataConverter)
     {
         _folderConverter = folderConverter;
         _ruleConverter = ruleConverter;
         _rawDataConverter = rawDataConverter;
     }
     
-    public ModDataModel Convert(DataManager.Models.ModDataModel toConvert)
+    public ModDataModel Convert(DataManager.Models.Mod.ModDataModel toConvert)
     {
         FolderModel? displayFolder = null;
         RuleModel? authorRule = null;

@@ -23,20 +23,12 @@
 
 #endregion
 
-using MD.Common;
-using MD.StellarisModManager.UI.Library.Models;
+namespace MD.StellarisModManager.UI.Library.ButtonHandling;
 
-namespace MD.StellarisModManager.UI.Library.Api.Converters;
-
-internal class FolderDataConverter : IConverter<DataManager.Models.Mod.FolderModel, FolderModel>
+public class CheckUpdates : IButtonExecutor
 {
-    public FolderModel Convert(DataManager.Models.Mod.FolderModel toConvert)
+    public void Execute()
     {
-        return new FolderModel
-        {
-            FolderName = toConvert.FolderName,
-            FolderID = toConvert.FolderID,
-            DisplayPriority = toConvert.DisplayPriority
-        };
+        Console.WriteLine("Checking for updates...");
     }
 }

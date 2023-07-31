@@ -23,20 +23,13 @@
 
 #endregion
 
-using MD.Common;
-using MD.StellarisModManager.UI.Library.Models;
 
-namespace MD.StellarisModManager.UI.Library.Api.Converters;
+namespace MD.StellarisModManager.DataManager.Models.Mod;
 
-internal class FolderDataConverter : IConverter<DataManager.Models.Mod.FolderModel, FolderModel>
+public class FolderModel
 {
-    public FolderModel Convert(DataManager.Models.Mod.FolderModel toConvert)
-    {
-        return new FolderModel
-        {
-            FolderName = toConvert.FolderName,
-            FolderID = toConvert.FolderID,
-            DisplayPriority = toConvert.DisplayPriority
-        };
-    }
+    public string FolderName { get; set; }
+    public int FolderID { get; set; }
+    public int DisplayPriority { get; set; }
+    public List<ModDataModel> ModsContained { get; set; }
 }

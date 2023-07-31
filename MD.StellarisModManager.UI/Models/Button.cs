@@ -23,20 +23,25 @@
 
 #endregion
 
-using MD.Common;
-using MD.StellarisModManager.UI.Library.Models;
+using MD.StellarisModManager.UI.Library.ButtonHandling;
 
-namespace MD.StellarisModManager.UI.Library.Api.Converters;
+namespace MD.StellarisModManager.UI.Models;
 
-internal class FolderDataConverter : IConverter<DataManager.Models.Mod.FolderModel, FolderModel>
+internal class Button : IButton
 {
-    public FolderModel Convert(DataManager.Models.Mod.FolderModel toConvert)
+    public string Key { get; private set; }
+    public IButtonExecutor Executor { get; private set; }
+    public bool Enabled { get; private set; }
+
+    public Button(string key, IButtonExecutor executor, bool enabled)
     {
-        return new FolderModel
-        {
-            FolderName = toConvert.FolderName,
-            FolderID = toConvert.FolderID,
-            DisplayPriority = toConvert.DisplayPriority
-        };
+        Key = key;
+        Executor = executor;
+        Enabled = enabled;
+    }
+
+    public void SetButtonState(bool state)
+    {
+        Enabled = state;
     }
 }

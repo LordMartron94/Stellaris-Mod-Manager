@@ -23,26 +23,32 @@
 
 #endregion
 
-using MD.StellarisModManager.Common;
+using MD.StellarisModManager.DataManager.Controllers;
 
-namespace MD.StellarisModManager.DataManager.Models;
+namespace MD.StellarisModManager.UI.Library.Api;
 
-public class ModDataModel
+public class ConfigurationEndpoint
 {
-    public int DatabaseId { get; set; }
+    private ConfigurationController _configurationController;
+
+    public ConfigurationEndpoint()
+    {
+        _configurationController = new ConfigurationController();
+    }
     
-    public ModDataRawModel Raw { get; set; }
+    /// <summary>
+    /// Note: If the path is invalid, this will simply be ignored.
+    /// </summary>
+    public void SendStellarisModDeploymentOverride(string path)
+    {
+        _configurationController.OverrideStellarisModDeploymentPath(path);
+    }
 
-    public int DisplayPriority { get; set; }
-    public FolderModel? DisplayFolder { get; set; }
-
-    public ModCategory? ModCategory { get; set; }
-
-    public RuleModel? AuthorRule { get; set; }
-    public RuleModel? ModderRule { get; set; }
-
-    public string? SmallDescription { get; set; }
-    public string? ExtendedDescription { get; set; }
-    
-    public bool Enabled { get; set; }
+    /// <summary>
+    /// Note: If the path is invalid, this will simply be ignored.
+    /// </summary>
+    public void AddStellarisModInstallLocation(string path)
+    {
+        _configurationController.AddStellarisModInstallLocation(path);
+    }
 }

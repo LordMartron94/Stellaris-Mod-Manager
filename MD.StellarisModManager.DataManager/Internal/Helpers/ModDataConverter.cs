@@ -25,7 +25,7 @@
 
 using MD.Common;
 using MD.StellarisModManager.Common;
-using MD.StellarisModManager.DataManager.Models;
+using MD.StellarisModManager.DataManager.Models.Mod;
 using Newtonsoft.Json;
 
 namespace MD.StellarisModManager.DataManager.Internal.Helpers;

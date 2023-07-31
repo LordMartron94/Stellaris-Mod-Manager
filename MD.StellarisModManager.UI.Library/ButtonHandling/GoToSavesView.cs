@@ -23,21 +23,12 @@
 
 #endregion
 
-namespace MD.StellarisModManager.DataManager.Models;
+namespace MD.StellarisModManager.UI.Library.ButtonHandling;
 
-public class ModDataRawModel
+public class GoToSavesView : IButtonExecutor
 {
-    public string ModName { get; set; }
-    public string SupportedStellarisVersion { get; set; }
-    public string ModVersion { get; set; }
-
-    public string ModPath { get; set; }
-    // ReSharper disable once InconsistentNaming
-    public string RemoteFileID { get; set; }
-    public string Picture { get; set; }
-    
-    public string ModID => RemoteFileID;
-
-    public List<string> Tags { get; set; }
-    public List<string> Dependencies { get; set; }
+    public void Execute()
+    {
+        Console.WriteLine("Enabling Saves view...");
+    }
 }

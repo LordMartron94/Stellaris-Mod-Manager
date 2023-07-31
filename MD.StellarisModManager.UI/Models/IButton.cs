@@ -23,13 +23,18 @@
 
 #endregion
 
+using System;
+using MD.StellarisModManager.UI.Library.ButtonHandling;
 
-namespace MD.StellarisModManager.DataManager.Models;
+namespace MD.StellarisModManager.UI.Models;
 
-public class FolderModel
+public interface IButton
 {
-    public string FolderName { get; set; }
-    public int FolderID { get; set; }
-    public int DisplayPriority { get; set; }
-    public List<ModDataModel> ModsContained { get; set; }
+    public string Key { get; }
+
+    public IButtonExecutor Executor { get; }
+
+    public bool Enabled { get; }
+
+    void SetButtonState(bool state);
 }

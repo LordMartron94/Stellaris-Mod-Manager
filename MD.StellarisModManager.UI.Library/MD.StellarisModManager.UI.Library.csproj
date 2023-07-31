@@ -7,14 +7,17 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\MD.Common\MD.Common.csproj" />
       <ProjectReference Include="..\MD.StellarisModManager.DataManager\MD.StellarisModManager.DataManager.csproj" />
     </ItemGroup>
 
     <ItemGroup>
+      <Reference Include="PresentationCore">
+        <HintPath>C:\Program Files\dotnet\shared\Microsoft.WindowsDesktop.App\7.0.0-rc.1.22427.1\PresentationCore.dll</HintPath>
+      </Reference>
       <Reference Include="PresentationFramework">
         <HintPath>C:\Program Files\dotnet\shared\Microsoft.WindowsDesktop.App\7.0.0-rc.1.22427.1\PresentationFramework.dll</HintPath>
       </Reference>
+
     </ItemGroup>
 
 

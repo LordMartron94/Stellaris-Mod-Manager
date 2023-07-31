@@ -23,12 +23,26 @@
 
 #endregion
 
+using MD.StellarisModManager.Common;
 
-namespace MD.StellarisModManager.DataManager.Models;
+namespace MD.StellarisModManager.DataManager.Models.Mod;
 
-public class ModListModel
+public class ModDataModel
 {
-    public string Name { get; set; }
-    public string ID { get; set; }
-    public Dictionary<ModDataModel, int> EnabledMods { get; set; }
+    public int DatabaseId { get; set; }
+    
+    public ModDataRawModel Raw { get; set; }
+
+    public int DisplayPriority { get; set; }
+    public FolderModel? DisplayFolder { get; set; }
+
+    public ModCategory? ModCategory { get; set; }
+
+    public RuleModel? AuthorRule { get; set; }
+    public RuleModel? ModderRule { get; set; }
+
+    public string? SmallDescription { get; set; }
+    public string? ExtendedDescription { get; set; }
+    
+    public bool Enabled { get; set; }
 }

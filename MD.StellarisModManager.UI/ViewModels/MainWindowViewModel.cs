@@ -23,32 +23,69 @@
 
 #endregion
 
-using System;
 using System.ComponentModel;
 using System.Windows;
 using Caliburn.Micro;
-using GongSolutions.Wpf.DragDrop;
 using MD.StellarisModManager.UI.Library.Api;
 using MD.StellarisModManager.UI.Library.Models;
 using MD.StellarisModManager.UI.ViewModels.Helpers;
 
 namespace MD.StellarisModManager.UI.ViewModels;
 
-public class MainWindowViewModel : Screen, IDropTarget
+public partial class MainWindowViewModel : Screen
 {
     private readonly ModEndpoint _modEndpoint;
-
     private readonly IModCollectionHandler _modCollectionHandler;
 
     public int ActiveMods { get; private set; }
+
+    private IButtonManager _buttonManager;
+
+    public double ProgressBarValue
+    {
+        get => _buttonManager.ProgressBarValue;
+        set
+        {
+            _buttonManager.ProgressBarValue = value;
+            NotifyOfPropertyChange(() => ProgressBarValue);
+        }
+    }
+    
+    public string ProgressStatusText
+    {
+        get => _buttonManager.ProgressStatusText;
+        set
+        {
+            _buttonManager.ProgressStatusText = value;
+            NotifyOfPropertyChange(() => ProgressStatusText);
+        }
+    }
+
+    public Visibility ProgressBarVisibility
+    {
+        get => _buttonManager.ProgressBarVisibility;
+        set
+        {
+            _buttonManager.ProgressBarVisibility = value;
+            NotifyOfPropertyChange(() => ProgressBarVisibility);
+        }
+    }
     
     public BindingList<ModDataModel> InstalledMods => _modCollectionHandler.InstalledMods;
 
     public MainWindowViewModel(ModEndpoint modEndpoint)
     {
         _modEndpoint = modEndpoint;
-
+        
+        _buttonManager = new ButtonManager(_modEndpoint);
+        _buttonManager.PropertyChanged += OnPropertyChanged;
+        
         _modCollectionHandler = new ModCollectionHandler();
+    }
+
+    private void OnPropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        NotifyOfPropertyChange(e.PropertyName);
     }
 
     protected override void OnViewLoaded(object view)
@@ -61,86 +98,32 @@ public class MainWindowViewModel : Screen, IDropTarget
     {
         _modCollectionHandler.AddMods(_modEndpoint.GetModList());
     }
-
-    #region Buttons
     
-    public void CheckUpdates()
-    {
-        Console.WriteLine("Checking for updates...");
-    }
-
-    public void CheckInstalled()
-    {
-        Console.WriteLine("Checking for installed mods...");
-    }
-
-    public void InstallNewMod()
-    {
-        Console.WriteLine("Installing new mod...");
-    }
-
-    public void Launch()
-    {
-        Console.WriteLine("Launching game...");
-    }
-
-    public void LoadOrder()
-    {
-        Console.WriteLine("Enabling Load order view...");
-    }
-
-    public void Saves()
-    {
-        Console.WriteLine("Enabling Saves view...");
-    }
-
-    public void Sort()
-    {
-        Console.WriteLine("Sorting Load Order...");
-    }
-
-    public void Export()
-    {
-        Console.WriteLine("Exporting Load Order...");
-    }
+    #region ButtonHandling
     
-    public void Import()
-    {
-        Console.WriteLine("Importing Load Order...");
-    }
+    public void CheckUpdates() => _buttonManager.ExecuteButton();
+    public void CheckInstalled() => _buttonManager.ExecuteButton();
+    public void InstallNewMod() => _buttonManager.ExecuteButton();
+    public void Launch() => _buttonManager.ExecuteButton();
+    public void LoadOrder() => _buttonManager.ExecuteButton();
+    public void Saves() => _buttonManager.ExecuteButton();
+    public void Sort() => _buttonManager.ExecuteButton();
+    public void Export() => _buttonManager.ExecuteButton();
+    public void Import() => _buttonManager.ExecuteButton();
     
     #endregion
-
-    #region Drag and Drop
     
-    public void DragOver(IDropInfo dropInfo)
-    {
-        ModDataModel? sourceItem = (ModDataModel?)dropInfo.Data;
-        ModDataModel? targetItem = (ModDataModel?)dropInfo.TargetItem;
+    #region ButtonLocks
 
-        if (sourceItem != null && targetItem != null)
-        {
-            dropInfo.DropTargetAdorner = DropTargetAdorners.Highlight;
-            dropInfo.Effects = DragDropEffects.Move;
-        }
-    }
-    
-    public void Drop(IDropInfo dropInfo)
-    {
-        ModDataModel? sourceItem = (ModDataModel?)dropInfo.Data;
-        ModDataModel? targetItem = (ModDataModel?)dropInfo.TargetItem;
-        
-        bool sourceExists = sourceItem != null;
-        bool targetExists = targetItem != null;
-        bool sourceAndTargetAreDifferent = sourceItem != targetItem;
-
-        bool validDrop = (sourceExists && targetExists) && sourceAndTargetAreDifferent;
-
-        if (!validDrop)
-            return;
-
-        sourceItem!.DisplayPriority = targetItem!.DisplayPriority;
-    }
+    public bool CanCheckUpdates => _buttonManager.GetButtonEnabled();
+    public bool CanCheckInstalled => _buttonManager.GetButtonEnabled();
+    public bool CanInstallNewMod => _buttonManager.GetButtonEnabled();
+    public bool CanLaunch => _buttonManager.GetButtonEnabled();
+    public bool CanLoadOrder => _buttonManager.GetButtonEnabled();
+    public bool CanSaves => _buttonManager.GetButtonEnabled();
+    public bool CanSort => _buttonManager.GetButtonEnabled();
+    public bool CanExport => _buttonManager.GetButtonEnabled();
+    public bool CanImport => _buttonManager.GetButtonEnabled();
     
     #endregion
 }

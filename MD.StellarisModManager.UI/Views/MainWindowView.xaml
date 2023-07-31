@@ -8,6 +8,37 @@
              xmlns:cm="http://caliburnmicro.com"
              mc:Ignorable="d" FontFamily="Segoe UI Light"
              d:DesignHeight="1060" d:DesignWidth="1920">
+    <UserControl.Resources>
+        <Style TargetType="Button" x:Key="InteractButton">
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="Background" Value="Purple" />
+            <Setter Property="Foreground" Value="White" />
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid Background="{TemplateBinding Background}">
+                            <ContentPresenter x:Name="MyContentPresenter" 
+                                              Content="{TemplateBinding Content}"
+                                              HorizontalAlignment="Center" 
+                                              VerticalAlignment="Center" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="Gray"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="DarkCyan"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    
     <Grid ShowGridLines="False">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
@@ -25,6 +56,7 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="20" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -51,7 +83,7 @@
         <Button 
             Grid.Row="1" Grid.Column="3" Width="100" Height="60"
             FontSize="12"
-            Background="Purple" Foreground="White" 
+            Style="{StaticResource InteractButton}"
             Margin="0 0 20 20"
             Name="CheckUpdates">
             Check for Updates
@@ -60,7 +92,7 @@
         <Button 
             Grid.Row="1" Grid.Column="4" Width="100" Height="60"
             FontSize="12"
-            Background="Purple" Foreground="White" 
+            Style="{StaticResource InteractButton}"
             Margin="0 0 20 20"
             Name="CheckInstalled">
             Check new 
@@ -70,7 +102,7 @@
         <Button 
             Grid.Row="1" Grid.Column="5" Width="100" Height="60"
             FontSize="12"
-            Background="Purple" Foreground="White" 
+            Style="{StaticResource InteractButton}"
             Margin="0 0 20 20"
             Name="InstallNewMod">
             Install new Mod
@@ -136,11 +168,6 @@
                     <DataGridTemplateColumn.CellEditingTemplate>
                         <DataTemplate>
                             <ComboBox ItemsSource="{Binding PossibleCategories}" SelectedItem="{Binding ModCategory}">
-                                <!-- <ComboBox.ItemTemplate> -->
-                                <!--     <DataTemplate> -->
-                                <!--         <TextBlock Text="{Binding Value}"></TextBlock> -->
-                                <!--     </DataTemplate> -->
-                                <!-- </ComboBox.ItemTemplate> -->
                             </ComboBox>
                         </DataTemplate>    
                     </DataGridTemplateColumn.CellEditingTemplate>
@@ -159,6 +186,24 @@
                 </DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
+        
+        <Grid
+            Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2"
+            Visibility="{Binding ProgressBarVisibility, FallbackValue=Collapsed}"
+            Margin="0 10 0 0">
+            <ProgressBar
+                MaxHeight="25"
+                Foreground="Turquoise"
+                Name="PbStatus"
+                Value="{Binding ProgressBarValue}">
+            </ProgressBar>
+            <StackPanel
+                HorizontalAlignment="Center" VerticalAlignment="Center"
+                Orientation="Horizontal">
+                <TextBlock FontSize="25" Text="{Binding ProgressStatusText}" />
+                <TextBlock FontSize="25" Margin="10 0 0 0" Text="{Binding ElementName=PbStatus, Path=Value, StringFormat={}{0:0}%}"/>
+            </StackPanel>
+        </Grid>
         
         <!--#endregion-->
         
@@ -226,7 +271,7 @@
                 Margin="40 20 0 0"
                 HorizontalAlignment="Left"
                 FontSize="40"
-                Background="Purple" Foreground="White"
+                Style="{StaticResource InteractButton}"
                 Name="Sort">
                 SORT
             </Button>
@@ -237,7 +282,7 @@
                 Margin="20 20 0 0"
                 HorizontalAlignment="Left"
                 FontSize="20"
-                Background="Purple" Foreground="White"
+                Style="{StaticResource InteractButton}"
                 Name="Export">
                 Export List
             </Button>
@@ -248,7 +293,7 @@
                 Margin="20 20 0 0"
                 HorizontalAlignment="Left"
                 FontSize="20"
-                Background="Purple" Foreground="White"
+                Style="{StaticResource InteractButton}"
                 Name="Import">
                 Import List
             </Button>

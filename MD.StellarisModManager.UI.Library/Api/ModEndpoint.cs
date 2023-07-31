@@ -34,11 +34,11 @@ public class ModEndpoint
 {
     private ModController _modController;
     
-    private IConverter<DataManager.Models.FolderModel, FolderModel> _folderConverter;
-    private IConverter<DataManager.Models.IncompatibilityModel, IncompatibilityModel> _incompatibilityConverter;
-    private IConverter<DataManager.Models.RuleModel, RuleModel> _ruleConverter;
-    private IConverter<DataManager.Models.ModDataRawModel, ModDataRawModel> _rawDataConverter;
-    private IConverter<DataManager.Models.ModDataModel, ModDataModel> _modDataConverter;
+    private IConverter<DataManager.Models.Mod.FolderModel, FolderModel> _folderConverter;
+    private IConverter<DataManager.Models.Mod.IncompatibilityModel, IncompatibilityModel> _incompatibilityConverter;
+    private IConverter<DataManager.Models.Mod.RuleModel, RuleModel> _ruleConverter;
+    private IConverter<DataManager.Models.Mod.ModDataRawModel, ModDataRawModel> _rawDataConverter;
+    private IConverter<DataManager.Models.Mod.ModDataModel, ModDataModel> _modDataConverter;
 
     public ModEndpoint()
     {
@@ -53,17 +53,30 @@ public class ModEndpoint
         _modDataConverter = new ModDataConverter(_folderConverter, _ruleConverter, _rawDataConverter);
     }
     
+    #region Getters
+    
     public ModDataModel GetModInfo(int modId)
     {
-        DataManager.Models.ModDataModel output = _modController.GetById(modId);
+        DataManager.Models.Mod.ModDataModel output = _modController.GetById(modId);
 
         return _modDataConverter.Convert(output);
     }
     
     public List<ModDataModel> GetModList()
     {
-        List<DataManager.Models.ModDataModel> output = _modController.GetAll();
+        List<DataManager.Models.Mod.ModDataModel> output = _modController.GetAll();
 
         return output.Select(_modDataConverter.Convert).ToList();
     }
+    
+    #endregion
+    
+    #region Methods
+
+    public async Task CheckForNewMods(IProgress<float>? progress)
+    {
+        await Task.Run(() => _modController.CheckNewMods(progress));
+    }
+    
+    #endregion
 }

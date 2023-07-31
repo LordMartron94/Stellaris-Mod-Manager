@@ -23,20 +23,22 @@
 
 #endregion
 
-using MD.Common;
-using MD.StellarisModManager.UI.Library.Models;
+namespace MD.StellarisModManager.DataManager.Models.Mod;
 
-namespace MD.StellarisModManager.UI.Library.Api.Converters;
-
-internal class FolderDataConverter : IConverter<DataManager.Models.Mod.FolderModel, FolderModel>
+public class ModDataRawModel
 {
-    public FolderModel Convert(DataManager.Models.Mod.FolderModel toConvert)
-    {
-        return new FolderModel
-        {
-            FolderName = toConvert.FolderName,
-            FolderID = toConvert.FolderID,
-            DisplayPriority = toConvert.DisplayPriority
-        };
-    }
+    public string ModName { get; set; }
+    public string SupportedStellarisVersion { get; set; }
+    public string? ModVersion { get; set; }
+
+    public string? ModPath { get; set; }
+    // ReSharper disable once InconsistentNaming
+    public string RemoteFileID { get; set; }
+    public string? Picture { get; set; }
+    public string? ArchivePath { get; set; }
+    
+    public string ModID => RemoteFileID;
+
+    public List<string> Tags { get; set; } = new List<string>();
+    public List<string> Dependencies { get; set; } = new List<string>();
 }

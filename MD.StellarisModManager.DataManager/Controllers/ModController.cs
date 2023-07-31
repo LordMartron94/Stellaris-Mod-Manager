@@ -23,21 +23,25 @@
 
 #endregion
 
+using MD.StellarisModManager.DataManager.Internal;
 using MD.StellarisModManager.DataManager.Internal.Helpers;
 using MD.StellarisModManager.DataManager.Library.DataAccess;
 using MD.StellarisModManager.DataManager.Models;
+using MD.StellarisModManager.DataManager.Models.Mod;
 
 namespace MD.StellarisModManager.DataManager.Controllers;
 
 public class ModController
 {
     private ModRepository _modRepository;
+    private ModHandler _modHandler;
 
     private ModDataConverter _converter;
 
     public ModController()
     {
         _modRepository = new ModRepository();
+        _modHandler = new ModHandler();
         _converter = new ModDataConverter();
     }
     
@@ -78,6 +82,19 @@ public class ModController
     public int AddMod(ModDataModel mod)
     {
         return _modRepository.AddMod(_converter.ConvertBack(mod));
+    }
+    
+    #endregion
+    
+    #region Methods
+
+    /// <summary>
+    /// Checks if there are new mods installed and moves them to the custom mod manager install location.
+    /// </summary>
+    /// <param name="progress"></param>
+    public void CheckNewMods(IProgress<float>? progress)
+    {
+        _modHandler.CheckForNewMods(progress);
     }
     
     #endregion

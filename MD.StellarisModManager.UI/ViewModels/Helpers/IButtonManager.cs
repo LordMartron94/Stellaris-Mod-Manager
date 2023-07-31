@@ -23,15 +23,32 @@
 
 #endregion
 
-using MD.StellarisModManager.Common;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Windows;
 
-namespace MD.StellarisModManager.DataManager.Models;
+namespace MD.StellarisModManager.UI.ViewModels.Helpers;
 
-public class IncompatibilityModel
+public interface IButtonManager
 {
-    public int AssociatedMod { get; set; }
-    public int IncompatibleMod { get; set; }
-    public IncompatibilityType IncompatibilityType { get; set; }
-    public string Description { get; set; }
-    public List<string> PossiblePatches { get; set; }
+    public event PropertyChangedEventHandler? PropertyChanged;
+
+    double ProgressBarValue { get; set; }
+    string ProgressStatusText { get; set; }
+    Visibility ProgressBarVisibility { get; set; }
+    
+    void ExecuteButton([CallerMemberName] string buttonName = "");
+
+    bool GetButtonEnabled([CallerMemberName] string buttonName = "");
+
+    /// <summary>
+    /// Call will be ignored if the manager is already executing an operation.
+    /// </summary>
+    void ToggleButtonState(string buttonName, [CallerMemberName] string operation = "");
+
+    /// <summary>
+    /// Call will be ignored if the manager is already executing an operation.
+    /// </summary>
+    void ToggleButtonStates(List<string> buttonNames, [CallerMemberName] string operation = "");
 }
