@@ -41,7 +41,7 @@ public class ModController
     public ModController()
     {
         _modRepository = new ModRepository();
-        _modHandler = new ModHandler();
+        _modHandler = new ModHandler(_modRepository);
         _converter = new ModDataConverter();
     }
     
@@ -82,6 +82,15 @@ public class ModController
     public int AddMod(ModDataModel mod)
     {
         return _modRepository.AddMod(_converter.ConvertBack(mod));
+    }
+    
+    /// <summary>
+    /// Updates a mod in the database.
+    /// </summary>
+    /// <param name="mod">The mod to update.</param>
+    public void UpdateMod(ModDataModel mod)
+    {
+        _modRepository.UpdateMod(_converter.ConvertBack(mod));
     }
     
     #endregion

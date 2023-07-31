@@ -29,7 +29,7 @@ using MD.StellarisModManager.DataManager.Models.Mod;
 
 namespace MD.StellarisModManager.UI.Library.Api.Converters;
 
-internal class IncompatibilityConverter : IConverter<IncompatibilityModel, Models.IncompatibilityModel> 
+internal class IncompatibilityConverter : IConverterBi<IncompatibilityModel, Models.IncompatibilityModel> 
 {
     public Models.IncompatibilityModel Convert(IncompatibilityModel toConvert)
     {
@@ -40,6 +40,18 @@ internal class IncompatibilityConverter : IConverter<IncompatibilityModel, Model
             IncompatibilityType = toConvert.IncompatibilityType,
             Description = toConvert.Description,
             PossiblePatches = toConvert.PossiblePatches
+        };
+    }
+
+    public IncompatibilityModel ConvertBack(Models.IncompatibilityModel toConvertBack)
+    {
+        return new IncompatibilityModel
+        {
+            AssociatedMod = toConvertBack.AssociatedMod,
+            IncompatibleMod = toConvertBack.IncompatibleMod,
+            IncompatibilityType = toConvertBack.IncompatibilityType,
+            Description = toConvertBack.Description,
+            PossiblePatches = toConvertBack.PossiblePatches
         };
     }
 }

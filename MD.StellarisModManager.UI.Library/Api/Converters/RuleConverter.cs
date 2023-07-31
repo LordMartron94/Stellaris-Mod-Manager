@@ -29,11 +29,11 @@ using MD.StellarisModManager.DataManager.Models.Mod;
 
 namespace MD.StellarisModManager.UI.Library.Api.Converters;
 
-internal class RuleConverter : IConverter<RuleModel, Models.RuleModel> 
+internal class RuleConverter : IConverterBi<RuleModel, Models.RuleModel> 
 {
-    private IConverter<IncompatibilityModel, Models.IncompatibilityModel> _incompatibilityConverter;
+    private IConverterBi<IncompatibilityModel, Models.IncompatibilityModel> _incompatibilityConverter;
 
-    public RuleConverter(IConverter<IncompatibilityModel, Models.IncompatibilityModel> incompatibilityConverter)
+    public RuleConverter(IConverterBi<IncompatibilityModel, Models.IncompatibilityModel> incompatibilityConverter)
     {
         _incompatibilityConverter = incompatibilityConverter;
     }
@@ -51,6 +51,22 @@ internal class RuleConverter : IConverter<RuleModel, Models.RuleModel>
             Incompatibilities = incompatibilities,
             AssociatedMod = toConvert.AssociatedMod,
             ImposedBy = toConvert.ImposedBy
+        };
+    }
+
+    public RuleModel ConvertBack(Models.RuleModel toConvertBack)
+    {
+        List<IncompatibilityModel> incompatibilities = 
+            toConvertBack.Incompatibilities.Select(_incompatibilityConverter.ConvertBack).ToList();
+        
+        return new RuleModel
+        {
+            RuleID = toConvertBack.RuleID,
+            LoadAfter = toConvertBack.LoadAfter,
+            LoadBefore = toConvertBack.LoadBefore,
+            Incompatibilities = incompatibilities,
+            AssociatedMod = toConvertBack.AssociatedMod,
+            ImposedBy = toConvertBack.ImposedBy
         };
     }
 }

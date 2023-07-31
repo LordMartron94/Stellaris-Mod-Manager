@@ -55,7 +55,7 @@ public class DisplayCountChangeStrategy : IPropertyChangeStrategy
         _modSorter = modSorter;
         _installedMods = installedMods;
 
-        _displayChangedStrategies = new Dictionary<DisplayChangeCase, IDisplayChangedStrategy>()
+        _displayChangedStrategies = new Dictionary<DisplayChangeCase, IDisplayChangedStrategy>
         {
             {DisplayChangeCase.BelowMin, new DisplayBelowMinStrategy()},
             {DisplayChangeCase.IsMin, new DisplayMinStrategy()},
@@ -77,11 +77,9 @@ public class DisplayCountChangeStrategy : IPropertyChangeStrategy
         
         ModDataModel modToChange = (ModDataModel)sender;
         
-        // Console.WriteLine($"Property Change: {modToChange}");
-        
         HandleDisplayPriorityChange(modToChange);
         _modSorter.SortByDisplayCount(_installedMods);
-
+        
         _currentlyUpdatingDisplayCount = false;
     }
 

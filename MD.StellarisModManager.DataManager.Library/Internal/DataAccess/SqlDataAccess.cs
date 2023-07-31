@@ -63,12 +63,13 @@ internal class SqlDataAccess
         return rows;
     }
     
-    public int SaveData<T>(string storedProcedure, T parameters, Connection connectionType)
+    public int? SaveData<T>(string storedProcedure, T parameters, Connection connectionType)
     {
         string connectionString = GetConnectionString(connectionType);
 
         using IDbConnection connection = new SqlConnection(connectionString);
 
-        return connection.QuerySingle<int>(storedProcedure, parameters, commandType: CommandType.StoredProcedure);
+        int id = connection.ExecuteScalar<int>(storedProcedure, parameters, commandType: CommandType.StoredProcedure);
+        return id;
     }
 }

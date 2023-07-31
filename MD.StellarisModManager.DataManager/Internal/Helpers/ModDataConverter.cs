@@ -32,6 +32,7 @@ namespace MD.StellarisModManager.DataManager.Internal.Helpers;
 
 internal class ModDataConverter : IConverterBi<Library.Models.ModDataModel, ModDataModel>
 {
+    // Internal -> Public
     public ModDataModel Convert(Library.Models.ModDataModel toConvert)
     {
         // TODO - add conversion of Folders and Rules
@@ -39,7 +40,10 @@ internal class ModDataConverter : IConverterBi<Library.Models.ModDataModel, ModD
 
         if (deserializedRaw == null)
             throw new Exception("Could not deserialize raw data");
-
+        
+        // if (!toConvert.Id.HasValue)
+        //     throw new Exception($"Could not convert because internal item does not have a database ID: {toConvert}");
+            
         Enum.TryParse(toConvert.Category, out ModCategory categoryEnumValue);
 
         bool enabled = toConvert.Enabled switch
@@ -55,6 +59,7 @@ internal class ModDataConverter : IConverterBi<Library.Models.ModDataModel, ModD
         return convertedModel;
     }
 
+    // Public -> Internal
     public Library.Models.ModDataModel ConvertBack(ModDataModel toConvertBack)
     {
         // TODO - add conversion of Folders and Rules
@@ -62,9 +67,9 @@ internal class ModDataConverter : IConverterBi<Library.Models.ModDataModel, ModD
         
         string? modCategory = toConvertBack.ModCategory.ToString();
 
-        int enabled = toConvertBack.Enabled? 1 : 0;
+        int enabled = toConvertBack.Enabled ? 1 : 0;
 
-        Library.Models.ModDataModel convertedModel = Library.Models.Helpers.ModDataFactory.Create(toConvertBack.DatabaseId, serializedRaw,
+        Library.Models.ModDataModel convertedModel = Library.Models.Helpers.ModDataFactory.CreateExisting(toConvertBack.DatabaseId, serializedRaw,
             toConvertBack.DisplayPriority, enabled, modCategory, toConvertBack.SmallDescription, toConvertBack.ExtendedDescription,
             toConvertBack.DisplayFolder?.FolderID, toConvertBack.AuthorRule?.RuleID, toConvertBack.ModderRule?.RuleID);
         

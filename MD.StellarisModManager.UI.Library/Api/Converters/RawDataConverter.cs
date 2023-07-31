@@ -28,7 +28,7 @@ using MD.StellarisModManager.UI.Library.Models;
 
 namespace MD.StellarisModManager.UI.Library.Api.Converters;
 
-internal class RawDataConverter : IConverter<DataManager.Models.Mod.ModDataRawModel, ModDataRawModel>
+internal class RawDataConverter : IConverterBi<DataManager.Models.Mod.ModDataRawModel, ModDataRawModel>
 {
     public ModDataRawModel Convert(DataManager.Models.Mod.ModDataRawModel toConvert)
     {
@@ -42,6 +42,21 @@ internal class RawDataConverter : IConverter<DataManager.Models.Mod.ModDataRawMo
             Picture = toConvert.Picture,
             Tags = toConvert.Tags,
             Dependencies = toConvert.Dependencies
+        };
+    }
+
+    public DataManager.Models.Mod.ModDataRawModel ConvertBack(ModDataRawModel toConvertBack)
+    {
+        return new DataManager.Models.Mod.ModDataRawModel
+        {
+            ModName = toConvertBack.ModName,
+            SupportedStellarisVersion = toConvertBack.SupportedStellarisVersion,
+            ModVersion = toConvertBack.ModVersion,
+            ModPath = toConvertBack.ModPath,
+            RemoteFileID = toConvertBack.RemoteFileID,
+            Picture = toConvertBack.Picture,
+            Tags = toConvertBack.Tags,
+            Dependencies = toConvertBack.Dependencies
         };
     }
 }

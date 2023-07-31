@@ -27,7 +27,34 @@ namespace MD.StellarisModManager.DataManager.Library.Models.Helpers;
 
 public static class ModDataFactory
 {
-    public static ModDataModel Create(
+    public static ModDataModel CreateNew(
+        string rawData,
+        int displayPriority,
+        int enabled,
+        string? category = null,
+        string? smallDescription = null,
+        string? extendedDescription = null,
+        int? displayFolderId = null,
+        int? authorRuleId = null,
+        int? modderRuleId = null)
+    {
+        ModDataModel model = new ModDataModel
+        {
+            RawData = rawData,
+            Enabled = enabled,
+            DisplayPriority = displayPriority,
+            FolderID = displayFolderId,
+            Category = category,
+            AuthorRuleID = authorRuleId,
+            ModderRuleID = modderRuleId,
+            DescriptionSmall = smallDescription,
+            DescriptionExtended = extendedDescription
+        };
+
+        return model;
+    }  
+    
+    public static ModDataModel CreateExisting(
         int dbId,
         string rawData,
         int displayPriority,

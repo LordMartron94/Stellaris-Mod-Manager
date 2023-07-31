@@ -58,5 +58,5 @@ public static class ModDataFactory
         };
 
         return model;
-    }   
+    }
 }

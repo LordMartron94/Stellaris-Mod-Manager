@@ -129,7 +129,7 @@
         
         <DataGrid 
             Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="7" Grid.RowSpan="2"
-            MaxWidth="1035"
+            MaxWidth="1035" MaxHeight="880"
             AutoGenerateColumns="False"
             Background="#575757"
             CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" 

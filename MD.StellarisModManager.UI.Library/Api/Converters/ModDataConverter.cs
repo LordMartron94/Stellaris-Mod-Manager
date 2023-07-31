@@ -28,15 +28,15 @@ using MD.StellarisModManager.UI.Library.Models;
 
 namespace MD.StellarisModManager.UI.Library.Api.Converters;
 
-internal class ModDataConverter : IConverter<DataManager.Models.Mod.ModDataModel, ModDataModel>
+internal class ModDataConverter : IConverterBi<DataManager.Models.Mod.ModDataModel, ModDataModel>
 {
-    private IConverter<DataManager.Models.Mod.FolderModel, FolderModel> _folderConverter;
-    private IConverter<DataManager.Models.Mod.RuleModel, RuleModel> _ruleConverter;
-    private IConverter<DataManager.Models.Mod.ModDataRawModel, ModDataRawModel> _rawDataConverter;
+    private IConverterBi<DataManager.Models.Mod.FolderModel, FolderModel> _folderConverter;
+    private IConverterBi<DataManager.Models.Mod.RuleModel, RuleModel> _ruleConverter;
+    private IConverterBi<DataManager.Models.Mod.ModDataRawModel, ModDataRawModel> _rawDataConverter;
 
-    public ModDataConverter(IConverter<DataManager.Models.Mod.FolderModel, FolderModel> folderConverter,
-        IConverter<DataManager.Models.Mod.RuleModel, RuleModel> ruleConverter,
-        IConverter<DataManager.Models.Mod.ModDataRawModel, ModDataRawModel> rawDataConverter)
+    public ModDataConverter(IConverterBi<DataManager.Models.Mod.FolderModel, FolderModel> folderConverter,
+        IConverterBi<DataManager.Models.Mod.RuleModel, RuleModel> ruleConverter,
+        IConverterBi<DataManager.Models.Mod.ModDataRawModel, ModDataRawModel> rawDataConverter)
     {
         _folderConverter = folderConverter;
         _ruleConverter = ruleConverter;
@@ -75,6 +75,43 @@ internal class ModDataConverter : IConverter<DataManager.Models.Mod.ModDataModel
             ExtendedDescription = toConvert.ExtendedDescription,
             
             Enabled = toConvert.Enabled
+        };
+        
+        return mod;
+    }
+
+    public DataManager.Models.Mod.ModDataModel ConvertBack(ModDataModel toConvertBack)
+    {
+        DataManager.Models.Mod.FolderModel? displayFolder = null;
+        DataManager.Models.Mod.RuleModel? authorRule = null;
+        DataManager.Models.Mod.RuleModel? modderRule = null;
+
+        if (toConvertBack.DisplayFolder != null)
+            displayFolder = _folderConverter.ConvertBack(toConvertBack.DisplayFolder);
+        
+        if (toConvertBack.AuthorRule != null)
+            authorRule = _ruleConverter.ConvertBack(toConvertBack.AuthorRule);
+        
+        if (toConvertBack.ModderRule != null)
+            modderRule = _ruleConverter.ConvertBack(toConvertBack.ModderRule);
+        
+        DataManager.Models.Mod.ModDataModel mod = new DataManager.Models.Mod.ModDataModel
+        {
+            DatabaseId = toConvertBack.DatabaseId,
+            
+            Raw = _rawDataConverter.ConvertBack(toConvertBack.Raw),
+            DisplayPriority = toConvertBack.DisplayPriority, 
+
+            DisplayFolder = displayFolder,
+            
+            ModCategory = toConvertBack.ModCategory,
+            AuthorRule = authorRule,
+            ModderRule = modderRule,
+            
+            SmallDescription = toConvertBack.SmallDescription,
+            ExtendedDescription = toConvertBack.ExtendedDescription,
+            
+            Enabled = toConvertBack.Enabled
         };
         
         return mod;

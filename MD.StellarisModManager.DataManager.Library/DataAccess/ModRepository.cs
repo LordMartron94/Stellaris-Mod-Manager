@@ -83,5 +83,25 @@ public class ModRepository
         return output;
     }
     
+    [SuppressMessage("ReSharper", "RedundantAnonymousTypePropertyName")]
+    public void UpdateMod(ModDataModel mod)
+    {
+        dynamic p = new
+        {
+            Id = mod.Id,
+            DisplayPriority = mod.DisplayPriority,
+            DescriptionSmall = mod.DescriptionSmall,
+            DescriptionExtended = mod.DescriptionExtended,
+            RawData = mod.RawData,
+            Category = mod.Category,
+            FolderID = mod.FolderID,
+            AuthorRuleID = mod.AuthorRuleID,
+            ModderRuleID = mod.ModderRuleID,
+            Enabled = mod.Enabled
+        };
+        
+        _sql.SaveData<dynamic>("spUpdateMod", p, Connection.Default);
+    } 
+    
     #endregion
 }

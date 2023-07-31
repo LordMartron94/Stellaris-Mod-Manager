@@ -44,6 +44,8 @@ public class ModCollectionHandler : IModCollectionHandler
 
     private BindingList<ModDataModel> _installedMods;
 
+    private RowChangeMemory _changeMemory;
+
     public BindingList<ModDataModel> InstalledMods
     {
         get => _installedMods;
@@ -59,6 +61,8 @@ public class ModCollectionHandler : IModCollectionHandler
         _installedMods = new BindingList<ModDataModel>();
         
         _modSorter = new ModSorter();
+        
+        _changeMemory = RowChangeMemory.GetInstance();
         
         _propertyChangeStrategies = new Dictionary<string, IPropertyChangeStrategy>
         {
@@ -76,8 +80,14 @@ public class ModCollectionHandler : IModCollectionHandler
 
     public void OnPropertyChange(object? sender, PropertyChangedEventArgs e)
     {
+        if (sender == null)
+            return;
+        
         if (_propertyChangeStrategies.TryGetValue(e.PropertyName!, out IPropertyChangeStrategy? strategy))
+        {
             strategy.HandlePropertyChange(sender);
+            _changeMemory.ModChanged((ModDataModel)sender);
+        }
         else
             Console.WriteLine("Unknown property change: " + e.PropertyName);
     }

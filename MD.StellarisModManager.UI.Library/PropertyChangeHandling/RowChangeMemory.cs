@@ -23,23 +23,42 @@
 
 #endregion
 
-namespace MD.StellarisModManager.UI.Library.Models;
+using MD.StellarisModManager.UI.Library.Api;
+using MD.StellarisModManager.UI.Library.Models;
 
-public class ModDataRawModel
+namespace MD.StellarisModManager.UI.Library.PropertyChangeHandling;
+
+public class RowChangeMemory
 {
-    public string ModName { get; set; }
-    public string SupportedStellarisVersion { get; set; }
-    public string? ModVersion { get; set; }
+    private List<ModDataModel> _changedMods;
 
-    public string? ModPath { get; set; }
-    // ReSharper disable once InconsistentNaming
-    public string RemoteFileID { get; set; }
-    public string? Picture { get; set; }
-    
-    public string ModID => RemoteFileID;
+    private static RowChangeMemory? _instance = null;
 
-    public List<string> Tags { get; set; } = new List<string>();
-    public List<string> Dependencies { get; set; } = new List<string>();
+    private ModEndpoint _endpoint;
     
-    public string TagDisplayText => string.Join(", ", Tags);
+    private RowChangeMemory()
+    {
+        _endpoint = new ModEndpoint();
+        
+        _changedMods = new List<ModDataModel>();
+    }
+
+    public static RowChangeMemory GetInstance()
+    {
+        return _instance ??= new RowChangeMemory();
+    }
+
+    public void ModChanged(ModDataModel changed)
+    {
+        if (_changedMods.Contains(changed))
+            return;
+        
+        _changedMods.Add(changed);
+    }
+
+    public void SaveChanges()
+    {
+        foreach (ModDataModel modDataModel in _changedMods)
+            _endpoint.UpdateMod(modDataModel);
+    }
 }

@@ -24,10 +24,13 @@
 #endregion
 
 using System.ComponentModel;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using Caliburn.Micro;
 using MD.StellarisModManager.UI.Library.Api;
 using MD.StellarisModManager.UI.Library.Models;
+using MD.StellarisModManager.UI.Library.PropertyChangeHandling;
 using MD.StellarisModManager.UI.ViewModels.Helpers;
 
 namespace MD.StellarisModManager.UI.ViewModels;
@@ -40,6 +43,8 @@ public partial class MainWindowViewModel : Screen
     public int ActiveMods { get; private set; }
 
     private IButtonManager _buttonManager;
+
+    private RowChangeMemory _changeMemory;
 
     public double ProgressBarValue
     {
@@ -77,6 +82,8 @@ public partial class MainWindowViewModel : Screen
     {
         _modEndpoint = modEndpoint;
         
+        _changeMemory = RowChangeMemory.GetInstance();
+        
         _buttonManager = new ButtonManager(_modEndpoint);
         _buttonManager.PropertyChanged += OnPropertyChanged;
         
@@ -92,6 +99,12 @@ public partial class MainWindowViewModel : Screen
     {
         base.OnViewLoaded(view);
         Initialize();
+    }
+
+    protected override Task OnDeactivateAsync(bool close, CancellationToken cancellationToken)
+    {
+        _changeMemory.SaveChanges();
+        return base.OnDeactivateAsync(close, cancellationToken);
     }
 
     private void Initialize()

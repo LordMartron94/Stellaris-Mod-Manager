@@ -34,11 +34,11 @@ public class ModEndpoint
 {
     private ModController _modController;
     
-    private IConverter<DataManager.Models.Mod.FolderModel, FolderModel> _folderConverter;
-    private IConverter<DataManager.Models.Mod.IncompatibilityModel, IncompatibilityModel> _incompatibilityConverter;
-    private IConverter<DataManager.Models.Mod.RuleModel, RuleModel> _ruleConverter;
-    private IConverter<DataManager.Models.Mod.ModDataRawModel, ModDataRawModel> _rawDataConverter;
-    private IConverter<DataManager.Models.Mod.ModDataModel, ModDataModel> _modDataConverter;
+    private IConverterBi<DataManager.Models.Mod.FolderModel, FolderModel> _folderConverter;
+    private IConverterBi<DataManager.Models.Mod.IncompatibilityModel, IncompatibilityModel> _incompatibilityConverter;
+    private IConverterBi<DataManager.Models.Mod.RuleModel, RuleModel> _ruleConverter;
+    private IConverterBi<DataManager.Models.Mod.ModDataRawModel, ModDataRawModel> _rawDataConverter;
+    private IConverterBi<DataManager.Models.Mod.ModDataModel, ModDataModel> _modDataConverter;
 
     public ModEndpoint()
     {
@@ -66,9 +66,21 @@ public class ModEndpoint
     {
         List<DataManager.Models.Mod.ModDataModel> output = _modController.GetAll();
 
-        return output.Select(_modDataConverter.Convert).ToList();
+        List<ModDataModel> converted = output.Select(_modDataConverter.Convert).ToList();
+
+        return converted;
     }
     
+    #endregion
+
+    #region Setters
+
+    public void UpdateMod(ModDataModel modDataModel)
+    {
+        DataManager.Models.Mod.ModDataModel converted = _modDataConverter.ConvertBack(modDataModel);
+        _modController.UpdateMod(converted);
+    }
+
     #endregion
     
     #region Methods

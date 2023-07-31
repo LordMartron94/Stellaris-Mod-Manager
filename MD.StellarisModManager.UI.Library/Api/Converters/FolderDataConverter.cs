@@ -28,7 +28,7 @@ using MD.StellarisModManager.UI.Library.Models;
 
 namespace MD.StellarisModManager.UI.Library.Api.Converters;
 
-internal class FolderDataConverter : IConverter<DataManager.Models.Mod.FolderModel, FolderModel>
+internal class FolderDataConverter : IConverterBi<DataManager.Models.Mod.FolderModel, FolderModel>
 {
     public FolderModel Convert(DataManager.Models.Mod.FolderModel toConvert)
     {
@@ -37,6 +37,16 @@ internal class FolderDataConverter : IConverter<DataManager.Models.Mod.FolderMod
             FolderName = toConvert.FolderName,
             FolderID = toConvert.FolderID,
             DisplayPriority = toConvert.DisplayPriority
+        };
+    }
+
+    public DataManager.Models.Mod.FolderModel ConvertBack(FolderModel toConvertBack)
+    {
+        return new DataManager.Models.Mod.FolderModel
+        {
+            FolderName = toConvertBack.FolderName,
+            FolderID = toConvertBack.FolderID,
+            DisplayPriority = toConvertBack.DisplayPriority
         };
     }
 }
