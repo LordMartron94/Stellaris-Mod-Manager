@@ -80,6 +80,7 @@ public class ButtonManager : IButtonManager
     [SuppressMessage("ReSharper", "ExplicitCallerInfoArgument")]
     public ButtonManager(ModEndpoint modEndpoint)
     {
+        ProgressBarVisibility = Visibility.Collapsed;
         _progressBarStatusText = "";
         
         _buttons = new List<IButton>();
