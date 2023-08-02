@@ -24,6 +24,7 @@
 #endregion
 
 using System.ComponentModel;
+using System.Diagnostics;
 using MD.StellarisModManager.UI.Library.Extensions;
 using MD.StellarisModManager.UI.Library.Models;
 
@@ -33,6 +34,12 @@ public class ModSorter : IModSorter
 {
     public void SortByDisplayCount(BindingList<ModDataModel> mods)
     {
+        Stopwatch stopwatch = Stopwatch.StartNew();
+
         mods.OrderBy(mod => mod.DisplayPriority);
+
+        stopwatch.Stop();
+
+        Console.WriteLine($"Time taken for sorting: {stopwatch.ElapsedMilliseconds} ms");
     }
 }

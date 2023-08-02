@@ -33,23 +33,20 @@ namespace MD.StellarisModManager.DataManager.Internal;
 
 public class ModHandler
 {
-    private ConfigurationManager _configurationManager;
+    private readonly ConfigurationManager _configurationManager;
 
-    private ModRepository _modRepository;
-    private ModDataConverter _modDataConverter;
+    private readonly ModRepository _modRepository;
 
     public ModHandler(ModRepository repository)
     {
         _configurationManager = ConfigurationManager.GetInstance();
-        
-        _modDataConverter = new ModDataConverter();
         
         _modRepository = repository;
     }
 
     public void CheckForNewMods(IProgress<float>? progress = null)
     {
-        List<string> stellarisInstallLocations = _configurationManager.StellarisModInstallDirectories;
+        IEnumerable<string> stellarisInstallLocations = _configurationManager.StellarisModInstallDirectories;
         List<DirectoryInfo> stellarisInstallDirectories = stellarisInstallLocations.Select(location => new DirectoryInfo(location)).ToList();
     
         DirectoryInfo modInstallLocation = new DirectoryInfo(_configurationManager.ModInstallDirectory);
@@ -77,7 +74,7 @@ public class ModHandler
 
             string modInstallPath = Path.Combine(modInstallLocation.ToString(), $@"{interpretedDescriptor.ModName}");
             
-            Utilities.MoveFilesRecursively(dir.ToString(), modInstallPath);
+            Utilities.MoveFilesRecursively(dir.ToString(), modInstallPath, _configurationManager.Debug);
 
             AddModToDatabase(interpretedDescriptor);
             

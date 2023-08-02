@@ -23,10 +23,13 @@
 
 #endregion
 
+using System.Diagnostics.CodeAnalysis;
 using MD.Common;
 
 namespace MD.StellarisModManager.DataManager.Internal;
 
+[SuppressMessage("ReSharper", "ConvertToAutoPropertyWhenPossible")]
+[SuppressMessage("ReSharper", "ConvertToAutoPropertyWithPrivateSetter")]
 internal sealed class ConfigurationManager
 {
     #region Properties
@@ -40,12 +43,12 @@ internal sealed class ConfigurationManager
     /// </summary>
     public string StellarisModDeploymentPath => _stellarisModDeploymentPath;
     
-    private List<string> _stellarisModInstallDirectories;
+    private readonly List<string> _stellarisModInstallDirectories;
     
     /// <summary>
     /// The directories where Stellaris or Steam originally has installed mods.
     /// </summary>
-    public List<string> StellarisModInstallDirectories => _stellarisModInstallDirectories;
+    public IEnumerable<string> StellarisModInstallDirectories => _stellarisModInstallDirectories;
     
     private string _modInstallDirectory;
     
@@ -53,6 +56,14 @@ internal sealed class ConfigurationManager
     /// The directory where the mod manager will put installed mods.
     /// </summary>
     public string ModInstallDirectory => _modInstallDirectory;
+
+    private bool _debug;
+    
+    /// <summary>
+    /// Whether or not the application is in debug mode.
+    /// <br/>Enables debug messages.
+    /// </summary>
+    public bool Debug => _debug;
     
     #endregion
     
@@ -60,6 +71,8 @@ internal sealed class ConfigurationManager
     
     private ConfigurationManager()
     {
+        _debug = true;
+        
         string docsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
         string appPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
         

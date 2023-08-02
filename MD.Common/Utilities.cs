@@ -41,10 +41,17 @@ public static class Utilities
         };
     }
     
-    public static void MoveFilesRecursively(string sourcePath, string targetPath)
+    /// <summary>
+    /// Moves files from one directory to another recursively.
+    /// After successful transfer of files, the source directory will be deleted.
+    /// </summary>
+    /// <param name="sourcePath">The source directory from which files will be moved.</param>
+    /// <param name="targetPath">The target directory to which files will be moved.</param>
+    /// <param name="debug">Boolean flag indicating whether debug mode is active. Defaults to 'false'.</param>
+    public static void MoveFilesRecursively(string sourcePath, string targetPath, bool debug = false)
     {
         CopyFilesRecursively(sourcePath, targetPath);
-        DeleteDirectoryRecursively(sourcePath);
+        DeleteDirectoryRecursively(sourcePath, debug);
     }
 
     /// <summary>
@@ -90,14 +97,15 @@ public static class Utilities
 
         return string.Join(directorySeparator.ToString(), pathSegments);
     }
-    
+
     /// <summary>
     /// Copies a file from the source path to the target directory.
     /// If a file with the same name exists in the target directory, it will be deleted prior to the copying process.
     /// </summary>
     /// <param name="sourcePath">The path of the file that needs to be copied.</param>
     /// <param name="targetDir">The directory to copy the file to.</param>
-    public static void CopyFile(string sourcePath, string targetDir)
+    /// <param name="debug">Whether or not to print debug messages.</param>
+    public static void CopyFile(string sourcePath, string targetDir, bool debug = false)
     {
         try
         {
@@ -110,56 +118,65 @@ public static class Utilities
 
             // Copy the file.
             File.Copy(sourcePath, targetPath);
-            Console.WriteLine($"The file was copied from {sourcePath} to {targetDir} successfully.");
+            
+            if (debug)
+                Console.WriteLine($"The file was copied from {sourcePath} to {targetDir} successfully.");
         }
         catch (Exception e)
         {
             Console.WriteLine($"The process failed: {e}");
         }
     }
-    
+
     /// <summary>
     /// Deletes a specified file.
     /// </summary>
     /// <param name="targetFile">The full path of the file that you want to delete.</param>
-    public static void DeleteFile(string targetFile)
+    /// <param name="debug">Whether or not to print debug messages.</param>
+    public static void DeleteFile(string targetFile, bool debug = false)
     {
         // Check if file exists
         if (File.Exists(targetFile))
         {
             // Delete the file
             File.Delete(targetFile);
-            // Console.WriteLine($"Deleted: {targetFile}");
+            
+            if (debug)
+                Console.WriteLine($"Deleted: {targetFile}");
         }
         else
         {
             Console.WriteLine($"The specified file {targetFile} does not exist.");
         }
     }
-    
+
     /// <summary>
     /// Deletes the specified directory and all its content, including all its subdirectories.
     /// </summary>
     /// <param name="targetDirectory">The full path of the directory that you want to delete.</param>
-    public static void DeleteDirectoryRecursively(string targetDirectory)
+    /// <param name="debug">Whether or not to print debug messages.</param>
+    public static void DeleteDirectoryRecursively(string targetDirectory, bool debug = false)
     {
         // Check if directory exists
         if (Directory.Exists(targetDirectory))
         {
             // Delete the directory and all its contents
             Directory.Delete(targetDirectory, recursive: true);
-            Console.WriteLine($"Deleted: {targetDirectory}");
+            
+            if (debug)
+                Console.WriteLine($"Deleted: {targetDirectory}");
         }
         else
             Console.WriteLine($"The specified directory {targetDirectory} does not exist.");
     }
-    
+
     /// <summary>
     /// Deletes the files satisfying the specified searchPattern in the given directory and all its subdirectories.
     /// </summary>
     /// <param name="targetDirectory">The full path of the directory that you want to delete files from.</param>
     /// <param name="searchPattern">The search string to match against the names of files in path. This parameter can contain a combination of valid literal path and wildcard (* and ?) characters, but doesn't support regular expressions.</param>
-    public static void DeleteFilesRecursively(string targetDirectory, string searchPattern)
+    /// <param name="debug">Whether or not to print debug messages.</param>
+    public static void DeleteFilesRecursively(string targetDirectory, string searchPattern, bool debug = false)
     {
         // Check if directory exists
         if (Directory.Exists(targetDirectory))
@@ -171,7 +188,9 @@ public static class Utilities
             foreach (string file in files)
             {
                 File.Delete(file);
-                Console.WriteLine($"Deleted: {file}");
+                
+                if (debug)
+                    Console.WriteLine($"Deleted: {file}");
             }
         }
         else
