@@ -60,7 +60,8 @@ public class Bootstrapper : BootstrapperBase
     protected override void Configure()
     {
         _container.Instance(_container)
-            .PerRequest<ModEndpoint>();
+            .PerRequest<ModEndpoint>()
+            .PerRequest<ConfigurationEndpoint>();
 
         _container
             .Singleton<IWindowManager, WindowManager>()

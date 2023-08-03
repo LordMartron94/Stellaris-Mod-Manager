@@ -78,7 +78,7 @@ public class DisplayCountChangeStrategy : IPropertyChangeStrategy
         ModDataModel modToChange = (ModDataModel)sender;
         
         HandleDisplayPriorityChange(modToChange);
-        _modSorter.SortByDisplayCount(_installedMods);
+        // _modSorter.SortByDisplayCount(_installedMods);
         
         _currentlyUpdatingDisplayCount = false;
     }

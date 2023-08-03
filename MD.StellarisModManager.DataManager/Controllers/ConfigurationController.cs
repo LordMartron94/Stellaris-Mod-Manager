@@ -51,4 +51,9 @@ public class ConfigurationController
     {
         _configurationManager.AddStellarisInstallLocation(path, false);
     }
+
+    public bool GetDebug()
+    {
+        return _configurationManager.Debug;
+    }
 }

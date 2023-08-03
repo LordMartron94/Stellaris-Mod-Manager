@@ -23,6 +23,7 @@
 
 #endregion
 
+using System.Diagnostics;
 using MD.StellarisModManager.UI.Library.Api;
 using MD.StellarisModManager.UI.Library.Models;
 
@@ -56,9 +57,23 @@ public class RowChangeMemory
         _changedMods.Add(changed);
     }
 
-    public void SaveChanges()
+    public void SaveChanges(bool debug = false)
     {
+        Stopwatch sw = new Stopwatch();
+        
+        sw.Start();
+
         foreach (ModDataModel modDataModel in _changedMods)
+        {
+            if (debug)
+                Console.WriteLine($"Saving mod: {modDataModel.Raw.ModID} with ID {modDataModel.DatabaseId} and display-count {modDataModel.DisplayPriority}");
+            
             _endpoint.UpdateMod(modDataModel);
+        }
+        
+        sw.Stop();
+        
+        if (debug)
+            Console.WriteLine($"Time spent to save changes: {sw.ElapsedMilliseconds}ms");
     }
 }

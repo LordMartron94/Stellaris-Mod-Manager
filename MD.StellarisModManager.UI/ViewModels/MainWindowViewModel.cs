@@ -23,10 +23,12 @@
 
 #endregion
 
+using System;
 using System.ComponentModel;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Data;
 using Caliburn.Micro;
 using MD.StellarisModManager.UI.Library.Api;
 using MD.StellarisModManager.UI.Library.Models;
@@ -42,9 +44,10 @@ public partial class MainWindowViewModel : Screen
 
     public int ActiveMods { get; private set; }
 
-    private IButtonManager _buttonManager;
-
-    private RowChangeMemory _changeMemory;
+    private readonly IButtonManager _buttonManager;
+    
+    private readonly RowChangeMemory _changeMemory;
+    private ConfigurationEndpoint _configurationEndpoint;
 
     public double ProgressBarValue
     {
@@ -76,11 +79,14 @@ public partial class MainWindowViewModel : Screen
         }
     }
     
+    public ICollectionView ModView { get; private set; }
+
     public BindingList<ModDataModel> InstalledMods => _modCollectionHandler.InstalledMods;
 
-    public MainWindowViewModel(ModEndpoint modEndpoint)
+    public MainWindowViewModel(ModEndpoint modEndpoint, ConfigurationEndpoint configurationEndpoint)
     {
         _modEndpoint = modEndpoint;
+        _configurationEndpoint = configurationEndpoint;
         
         _changeMemory = RowChangeMemory.GetInstance();
         
@@ -88,6 +94,8 @@ public partial class MainWindowViewModel : Screen
         _buttonManager.PropertyChanged += OnPropertyChanged;
         
         _modCollectionHandler = new ModCollectionHandler();
+
+        ModView = CollectionViewSource.GetDefaultView(InstalledMods);
     }
 
     private void OnPropertyChanged(object? sender, PropertyChangedEventArgs e)
@@ -103,13 +111,20 @@ public partial class MainWindowViewModel : Screen
 
     protected override Task OnDeactivateAsync(bool close, CancellationToken cancellationToken)
     {
-        _changeMemory.SaveChanges();
+        _changeMemory.SaveChanges(_configurationEndpoint.GetDebug());
         return base.OnDeactivateAsync(close, cancellationToken);
     }
 
     private void Initialize()
     {
-        _modCollectionHandler.AddMods(_modEndpoint.GetModList());
+        _modCollectionHandler.AddMods(_modEndpoint.GetModList(), false);
+        
+        // if (ModView.SortDescriptions.Count > 0)
+        //     ModView.SortDescriptions.Clear();
+        //
+        // ModView.SortDescriptions.Add(new SortDescription("DisplayPriority", ListSortDirection.Ascending));
+        
+        Console.WriteLine($"Can group: {ModView.CanSort}");
     }
     
     #region ButtonHandling

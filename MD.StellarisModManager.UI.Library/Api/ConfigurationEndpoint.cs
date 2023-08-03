@@ -51,4 +51,9 @@ public class ConfigurationEndpoint
     {
         _configurationController.AddStellarisModInstallLocation(path);
     }
+
+    public bool GetDebug()
+    {
+        return _configurationController.GetDebug();
+    }
 }

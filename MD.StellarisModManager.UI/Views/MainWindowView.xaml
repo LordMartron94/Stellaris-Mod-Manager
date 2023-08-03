@@ -133,10 +133,10 @@
             AutoGenerateColumns="False"
             Background="#575757"
             CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" 
-            CanUserReorderColumns="True" CanUserResizeColumns="True" CanUserSortColumns="True"
+            CanUserReorderColumns="True" CanUserResizeColumns="True" CanUserSortColumns="False"
             SelectionMode="Single"
             dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True" dd:DragDrop.DropHandler="{Binding}"
-            Name="InstalledMods">
+            ItemsSource="{Binding ModView}">
             <DataGrid.Columns>
                 <DataGridCheckBoxColumn Header="Enabled" Binding="{Binding Enabled, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False">
                     
@@ -146,7 +146,7 @@
 
                 </DataGridTextColumn>
                 
-                <DataGridTextColumn Header="Conflicts and Flags" IsReadOnly="True" >
+                <DataGridTextColumn Header="Conflicts and Flags" IsReadOnly="True">
 
                 </DataGridTextColumn>
                 
